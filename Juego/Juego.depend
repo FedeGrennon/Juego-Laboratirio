@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1509027888 source:f:\laboratorio\juego\juego\main.cpp
+	"SDL/SDL.h"
+	"Personaje.h"
+	"Escenario.h"
+
+1509027911 f:\laboratorio\juego\juego\personaje.h
+
+1509027391 f:\laboratorio\juego\juego\escenario.h
+	"Personaje.h"
+
+1509048949 source:f:\utn\2do cuatrimestre\juego\juego\main.cpp
+	"SDL/SDL.h"
+	"Personaje.h"
+	"Escenario.h"
+
+1509049108 f:\utn\2do cuatrimestre\juego\juego\personaje.h
+
+1509048924 f:\utn\2do cuatrimestre\juego\juego\escenario.h
+	"Personaje.h"
+
