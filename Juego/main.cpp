@@ -13,7 +13,6 @@ int main(int argc, char* args[]){
     personaje.posicionar(100, 150);
 
     SDL_Init(SDL_INIT_VIDEO);
-    ///SETEAR PANTALLA
     pantalla = SDL_SetVideoMode(800,600,32,SDL_HWSURFACE| SDL_DOUBLEBUF);
 
     suelo.cargar();
@@ -28,7 +27,7 @@ int main(int argc, char* args[]){
         SDL_Flip(pantalla);
 
         SDL_PollEvent(&tecla);
-        personaje.mover(tecla);
+        personaje.mover();
         if(tecla.type == SDL_QUIT)
             break;
     }

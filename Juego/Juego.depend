@@ -19,3 +19,13 @@
 1509048924 f:\utn\2do cuatrimestre\juego\juego\escenario.h
 	"Personaje.h"
 
+1509054786 source:f:\github\juego-laboratirio\juego\main.cpp
+	"SDL/SDL.h"
+	"Personaje.h"
+	"Escenario.h"
+
+1509055833 f:\github\juego-laboratirio\juego\personaje.h
+
+1509048924 f:\github\juego-laboratirio\juego\escenario.h
+	"Personaje.h"
+
