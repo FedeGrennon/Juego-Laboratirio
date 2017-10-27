@@ -4,11 +4,11 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
-#include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
-int main(int argc, char* args[]){
+int main(int argc, char** argv){
     SDL_Surface* pantalla = NULL;
     SDL_Surface* asd = NULL;
     SDL_Event tecla;
@@ -29,20 +29,20 @@ int main(int argc, char* args[]){
     TTF_Init();
     fuente = TTF_OpenFont("Letra.ttf",20);
 
+    SDL_Init(SDL_INIT_VIDEO);
+    pantalla = SDL_SetVideoMode(800,600,32,SDL_HWSURFACE| SDL_DOUBLEBUF);
+
     atexit(TTF_Quit);
 
     fgcolor.r=200;  fgcolor.g=200;  fgcolor.b=10;
     bgcolor.r=255;  bgcolor.g=0;  bgcolor.b=0;
 
-    cout << msg << texto;
+    sprintf(msg,"%s",texto);
     ttext = TTF_RenderText_Shaded(fuente,msg,fgcolor,bgcolor);
     rectangulo.y=100;
     rectangulo.x=100;
     rectangulo.w=ttext->w;
     rectangulo.h=ttext->h;
-
-    SDL_Init(SDL_INIT_VIDEO);
-    pantalla = SDL_SetVideoMode(800,600,32,SDL_HWSURFACE| SDL_DOUBLEBUF);
 
     suelo.cargar();
     personaje.cargar();
@@ -53,11 +53,6 @@ int main(int argc, char* args[]){
         SDL_SetColorKey(ttext,SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(ttext->format,255,0,0));
 
         SDL_BlitSurface(ttext,NULL,pantalla,&rectangulo);
-
-
-
-
-
 
 
         personaje.mostrar(pantalla);
