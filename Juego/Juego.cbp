@@ -30,10 +30,10 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="F:/GitHub/Juego-Laboratirio/Juego/Mingw32/SDL/include" />
-			<Add directory="F:/GitHub/Juego-Laboratirio/Juego/Mingw32/SDL_image/include" />
-			<Add directory="F:/GitHub/Juego-Laboratirio/Juego/Mingw32/SDL_ttf/include" />
-			<Add directory="F:/GitHub/Juego-Laboratirio/Juego/Mingw32/SDL_mixer/include" />
+			<Add directory="Mingw32/SDL/include" />
+			<Add directory="Mingw32/SDL_image/include" />
+			<Add directory="Mingw32/SDL_ttf/include" />
+			<Add directory="Mingw32/SDL_mixer/include" />
 		</Compiler>
 		<Linker>
 			<Add option="-lmingw32" />
@@ -42,10 +42,10 @@
 			<Add option="-lSDL_image" />
 			<Add option="-lSDL_mixer" />
 			<Add option="-lSDL_ttf" />
-			<Add directory="F:/GitHub/Juego-Laboratirio/Juego/Mingw32/SDL/lib" />
-			<Add directory="F:/GitHub/Juego-Laboratirio/Juego/Mingw32/SDL_image/lib" />
-			<Add directory="F:/GitHub/Juego-Laboratirio/Juego/Mingw32/SDL_ttf/lib" />
-			<Add directory="F:/GitHub/Juego-Laboratirio/Juego/Mingw32/SDL_mixer/lib" />
+			<Add directory="Mingw32/SDL/lib" />
+			<Add directory="Mingw32/SDL_image/lib" />
+			<Add directory="Mingw32/SDL_ttf/lib" />
+			<Add directory="Mingw32/SDL_mixer/lib" />
 		</Linker>
 		<Unit filename="Escenario.h" />
 		<Unit filename="Personaje.h" />

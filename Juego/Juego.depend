@@ -19,14 +19,14 @@
 1509048924 f:\utn\2do cuatrimestre\juego\juego\escenario.h
 	"Personaje.h"
 
-1509133944 source:f:\github\juego-laboratirio\juego\main.cpp
+1509134004 source:f:\github\juego-laboratirio\juego\main.cpp
 	<SDL/SDL.h>
 	"Personaje.h"
 	"Escenario.h"
 	<SDL_image.h>
 	<SDL_ttf.h>
 	<SDL_mixer.h>
-	<iostream>
+	<stdio.h>
 
 1509070350 f:\github\juego-laboratirio\juego\personaje.h
 
