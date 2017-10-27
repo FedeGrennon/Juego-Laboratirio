@@ -19,13 +19,247 @@
 1509048924 f:\utn\2do cuatrimestre\juego\juego\escenario.h
 	"Personaje.h"
 
-1509054786 source:f:\github\juego-laboratirio\juego\main.cpp
-	"SDL/SDL.h"
+1509071774 source:f:\github\juego-laboratirio\juego\main.cpp
+	<SDL/SDL.h>
 	"Personaje.h"
 	"Escenario.h"
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<SDL_mixer.h>
+	<iostream>
 
-1509055833 f:\github\juego-laboratirio\juego\personaje.h
+1509070350 f:\github\juego-laboratirio\juego\personaje.h
 
 1509048924 f:\github\juego-laboratirio\juego\escenario.h
 	"Personaje.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_audio.h"
+	"SDL_cdrom.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_loadso.h"
+	"SDL_mutex.h"
+	"SDL_rwops.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_video.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1326110987 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_config.h
+	"SDL_platform.h"
+	"SDL_config_dreamcast.h"
+	"SDL_config_macos.h"
+	"SDL_config_macosx.h"
+	"SDL_config_symbian.h"
+	"SDL_config_win32.h"
+	"SDL_config_os2.h"
+	"SDL_config_minimal.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_platform.h
+
+1326110994 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_config_win32.h
+	"SDL_platform.h"
+
+1326111000 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\begin_code.h
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\close_code.h
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_cdrom.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_active.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_quit.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_active.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keysym.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_keysym.h
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509070167 f:\github\juego-laboratirio\juego\mingw32\sdl_ttf\include\sdl2\sdl_ttf.h
+	"SDL/SDL.h"
+	"SDL/begin_code.h"
+	"SDL/close_code.h"
+
+1509070189 f:\github\juego-laboratirio\juego\mingw32\sdl_image\include\sdl2\sdl_image.h
+	"SDL/SDL.h"
+	"SDL/SDL_version.h"
+	"SDL/begin_code.h"
+	"SDL/close_code.h"
+
+1509070268 f:\github\juego-laboratirio\juego\mingw32\sdl_mixer\include\sdl2\sdl_mixer.h
+	"SDL/SDL_stdinc.h"
+	"SDL/SDL_rwops.h"
+	"SDL/SDL_audio.h"
+	"SDL/SDL_endian.h"
+	"SDL/SDL_version.h"
+	"SDL/begin_code.h"
+	"SDL/close_code.h"
+
+1509070189 f:\github\juego-laboratirio\juego\mingw32\sdl_image\include\sdl\sdl_image.h
+	"SDL/SDL.h"
+	"SDL/SDL_version.h"
+	"SDL/begin_code.h"
+	"SDL/close_code.h"
+
+1509070167 f:\github\juego-laboratirio\juego\mingw32\sdl_ttf\include\sdl\sdl_ttf.h
+	"SDL/SDL.h"
+	"SDL/begin_code.h"
+	"SDL/close_code.h"
+
+1509070268 f:\github\juego-laboratirio\juego\mingw32\sdl_mixer\include\sdl\sdl_mixer.h
+	"SDL/SDL_stdinc.h"
+	"SDL/SDL_rwops.h"
+	"SDL/SDL_audio.h"
+	"SDL/SDL_endian.h"
+	"SDL/SDL_version.h"
+	"SDL/begin_code.h"
+	"SDL/close_code.h"
 
