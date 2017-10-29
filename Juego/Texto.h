@@ -11,8 +11,12 @@ class cadena{
         char* msg;
 
     public:
-        cadena(){TTF_Init();}
-        void cargar(int tamFuente){fuente = TTF_OpenFont("Letra.ttf",tamFuente);}
+        cadena(){
+            TTF_Init();
+            atexit(TTF_Quit);
+        }
+
+        void cargar(char* tipografia, int tamFuente){fuente = TTF_OpenFont(tipografia,tamFuente);}
         void escribirCadena(char* a){strcpy(texto, a);}
         void colorRelleno(int rojo, int verde, int azul){fgcolor.r=rojo;  fgcolor.g=verde; fgcolor.b=azul;}
         void colorFondo(int rojo, int verde, int azul){bgcolor.r=rojo;  bgcolor.g=verde; bgcolor.b=azul;}
@@ -23,14 +27,11 @@ class cadena{
         void posicion(int x, int y){
             rectangulo.y=y;
             rectangulo.x=x;
-            rectangulo.w=ttext->w;
-            rectangulo.h=ttext->h;
         }
         void pintarColorFondo(){SDL_SetColorKey(ttext,SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(ttext->format,bgcolor.r,bgcolor.g,bgcolor.b));}
         void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(ttext,NULL,pantalla,&rectangulo);}
 
         ~cadena(){
-            atexit(TTF_Quit);
             TTF_CloseFont(fuente);
             SDL_FreeSurface(ttext);
         }

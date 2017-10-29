@@ -2,20 +2,19 @@
 #define ESCENARIO_H_INCLUDED
 #include "Personaje.h"
 
-
-class piso{
-    private:
-        SDL_Surface* suelo;
+class objetos{
+     private:
+        SDL_Surface* objeto;
         SDL_Rect pos;
     public:
-        piso(){suelo = NULL;}
-        void cargar(){suelo=SDL_LoadBMP("Piso.bmp");}
+        objetos(){objeto = NULL;}
+        void cargar(char* imagen){objeto=IMG_Load(imagen);}
         void posicionar(int x=0, int y=0){
             pos.x=x;
             pos.y=y;
         }
-        void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(suelo, NULL, pantalla, &pos);}
-        ~piso(){SDL_FreeSurface(suelo);}
+        void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(objeto, NULL, pantalla, &pos);}
+        ~objetos(){SDL_FreeSurface(objeto);}
 };
 
 #endif // ESCENARIO_H_INCLUDED

@@ -50,6 +50,7 @@
 		<Unit filename="Escenario.h" />
 		<Unit filename="Personaje.h" />
 		<Unit filename="Texto.h" />
+		<Unit filename="Varios.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

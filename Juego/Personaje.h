@@ -7,14 +7,14 @@ class pj{
         SDL_Rect pos;
     public:
         pj(){personaje = NULL;}
-        void cargar(){personaje=SDL_LoadBMP("Personaje.bmp");}
+        void cargar(char* imagen){personaje=IMG_Load(imagen);}
         void posicionar(float x=0, float y=0){
             pos.x=x;
             pos.y=y;
         }
         void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(personaje, NULL, pantalla, &pos);}
-        ~pj(){SDL_FreeSurface(personaje);}
         void mover();
+        ~pj(){SDL_FreeSurface(personaje);}
 };
 
 void pj::mover(){
