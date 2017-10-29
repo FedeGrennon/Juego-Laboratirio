@@ -7,8 +7,7 @@ class cadena{
         SDL_Rect rectangulo;
         SDL_Surface *ttext;
         TTF_Font *fuente;
-        char* texto;
-        char* msg;
+        char texto[100];
 
     public:
         cadena(){
@@ -21,8 +20,7 @@ class cadena{
         void colorRelleno(int rojo, int verde, int azul){fgcolor.r=rojo;  fgcolor.g=verde; fgcolor.b=azul;}
         void colorFondo(int rojo, int verde, int azul){bgcolor.r=rojo;  bgcolor.g=verde; bgcolor.b=azul;}
         void renderizar(){
-            sprintf(msg,"%s",texto);
-            ttext = TTF_RenderText_Shaded(fuente,msg,fgcolor,bgcolor);
+            ttext = TTF_RenderText_Shaded(fuente,texto,fgcolor,bgcolor);
         }
         void posicion(int x, int y){
             rectangulo.y=y;

@@ -12,8 +12,11 @@ class objetos{
         void posicionar(int x=0, int y=0){
             pos.x=x;
             pos.y=y;
+            pos.w=objeto->w;
+            pos.h=objeto->h;
         }
         void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(objeto, NULL, pantalla, &pos);}
+        SDL_Rect getRect(){return pos;}
         ~objetos(){SDL_FreeSurface(objeto);}
 };
 
