@@ -26,7 +26,7 @@ class cadena{
             rectangulo.y=y;
             rectangulo.x=x;
         }
-        void pintarColorFondo(){SDL_SetColorKey(ttext,SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(ttext->format,bgcolor.r,bgcolor.g,bgcolor.b));}
+        void pintarColorFondo(int rojo, int verde, int azul){SDL_SetColorKey(ttext,SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(ttext->format,rojo,verde,azul));}
         void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(ttext,NULL,pantalla,&rectangulo);}
 
         ~cadena(){

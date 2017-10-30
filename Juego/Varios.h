@@ -3,10 +3,9 @@
 
 bool salir(){
     SDL_Event tecla;
-
     SDL_PollEvent(&tecla);
 
-    if(tecla.type == SDL_QUIT){
+    if(tecla.type==SDL_QUIT){
         return false;
     }
     if(tecla.type == SDL_KEYDOWN){

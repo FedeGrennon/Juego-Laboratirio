@@ -11,45 +11,50 @@
 
 int main(int argc, char** argv){
     SDL_Surface* pantalla = NULL;
-    objetos suelo, caja;
+    objetos suelo;
     pj personaje;
     cadena txt;
     bool gameloop=true;
-    bool col=false;
+    bool colPiso;
 
     SDL_Init(SDL_INIT_EVERYTHING);
     pantalla = SDL_SetVideoMode(800,600,32,SDL_HWSURFACE| SDL_DOUBLEBUF);
 
     suelo.cargar("Imagenes/Piso.bmp");
-    personaje.cargar("Imagenes/Personaje.bmp");
-    caja.cargar("Imagenes/Caja.png");
+    personaje.cargar("Imagenes/Personaje1.bmp");
     suelo.posicionar(0,450);
     personaje.posicionar(100, 150);
-    caja.posicionar(400,400);
+    personaje.velocidad(1, 1);
 
     txt.cargar("Tipografias/Letra.ttf", 20);
-    txt.escribirCadena("HOLA");
+    txt.escribirCadena(" ");
     txt.colorRelleno(0,0,0);
     txt.colorFondo(0,0,0);
     txt.renderizar();
     txt.posicion(20, 20);
 
     while(gameloop==true){
+        gameloop=salir();
         pintarPantalla(pantalla, 110, 190, 250);
 
-        txt.pintarColorFondo();
+        txt.pintarColorFondo(0,0,0);
         txt.mostrar(pantalla);
         personaje.mostrar(pantalla);
         suelo.mostrar(pantalla);
-        caja.mostrar(pantalla);
 
         personaje.mover();
-        col=personaje.colision(suelo.getRect());
-        personaje.gravedad(col);
+        colPiso=personaje.colision(suelo.getRect());
+        personaje.gravedad(colPiso);
+
+        if(colPiso==true){
+             txt.escribirCadena("colisiono Piso");
+             txt.renderizar();
+        }else{
+            txt.escribirCadena("NO colisiono");
+            txt.renderizar();
+        }
 
         SDL_Flip(pantalla);
-
-        //gameloop=salir();
     }
 
     return 0;
