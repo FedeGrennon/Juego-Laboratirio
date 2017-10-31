@@ -32,6 +32,10 @@ void pj::mover(){
         pos.x += vel;
     if(tecla[SDLK_LEFT] == 1)
         pos.x -= vel;
+    if(tecla[SDLK_UP] == 1)
+        pos.y -= vel;
+    if(tecla[SDLK_DOWN] == 1)
+        pos.y += vel;
 }
 
 bool pj::colision(SDL_Rect objAcolisionar){

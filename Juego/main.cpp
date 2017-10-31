@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <windows.h>
+#include <time.h>
 
 #include "Varios.h"
 #include "Personaje.h"
@@ -18,12 +19,15 @@ int main(int argc, char** argv){
     objetos suelo, caja;
     pj personaje;
     cadena txt;
+    archivo ran;
     SDL_Event tecla;
     bool gameloop=true;
     bool eventoEsc;
     char* algo;
     char palabra[30];
-    strcpy(palabra, "ESCTIRO: ");
+    strcpy(palabra, "ESCRITO: ");
+
+    srand(time(NULL));
 
     const int FPS=60;
     const int frameDelay=1000/FPS;
@@ -33,28 +37,27 @@ int main(int argc, char** argv){
     SDL_Init(SDL_INIT_EVERYTHING);
     pantalla = SDL_SetVideoMode(800,600,32,SDL_HWSURFACE | SDL_DOUBLEBUF);
 
-    suelo.cargar("Imagenes/Piso.bmp");
     personaje.cargar("Imagenes/Personaje1.bmp");
-    suelo.posicionar(0,450);
-    personaje.posicionar(100, 350);
-    personaje.velocidad(4);
+    suelo.cargar("Imagenes/Escenario 1.png");
+    suelo.posicionar(0,0);
+    personaje.posicionar(100, 420);
+    personaje.velocidad(3);
 
     txt.cargar("Tipografias/Letra.ttf", 20);
     txt.escribirCadena(" ");
     txt.colorRelleno(0,0,0);
-    txt.colorFondo(0,0,0);
+    txt.colorFondo(0,153,153);
     txt.renderizar();
-    txt.posicion(20, 20);
+    txt.posicion(400, 20);
+
+    ran.random(1);
 
     while(gameloop==true){
         frameStart=SDL_GetTicks();
 
         pintarPantalla(pantalla, 110, 190, 250);
 
-        txt.pintarColorFondo(0,0,0);
-        txt.mostrar(pantalla);
-        personaje.mostrar(pantalla);
-        suelo.mostrar(pantalla);
+        txt.pintarColorFondo(0,153,153);
 
         eventoEsc=SDL_PollEvent(&tecla);
 
@@ -73,6 +76,16 @@ int main(int argc, char** argv){
 
         txt.escribirCadena(palabra);
         txt.renderizar();
+
+        suelo.mostrar(pantalla);
+        personaje.mostrar(pantalla);
+        txt.mostrar(pantalla);
+        ran.mostrarRand(pantalla);
+
+        if(ran.estado(pantalla, palabra)){
+            strcpy(palabra, "ESCRITO: ");
+            ran.random(1);
+        }
 
         SDL_Flip(pantalla);
 

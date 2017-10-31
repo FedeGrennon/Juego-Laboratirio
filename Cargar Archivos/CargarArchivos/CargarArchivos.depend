@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1509478486 source:f:\github\juego-laboratirio\cargar archivos\cargararchivos\main.cpp
+	<iostream>
+	<cstdlib>
+	<stdio.h>
+

@@ -1,6 +1,9 @@
 #ifndef TEXTO_H_INCLUDED
 #define TEXTO_H_INCLUDED
 
+const char* rutaArchivoNormal="Archivos/palabrasNor.dat";
+const char* rutaArchivoDificil="Archivos/palabrasDif.dat";
+
 class cadena{
     private:
         SDL_Color bgcolor,fgcolor;
@@ -151,13 +154,151 @@ bool escribir(SDL_Event tecla, char* palabra){
             strcat(palabra, "8");
         else if(tecla.key.keysym.sym==SDLK_KP9)
             strcat(palabra, "9");
-        else if(tecla.key.keysym.sym)
+        else if(tecla.key.keysym.sym){
             letra=SDL_GetKeyName(tecla.key.keysym.sym);
+        }
     }
 
     strcat(palabra, letra);
 
+
     return false;
 }
 
+
+
+class archivo{
+    private:
+        char palabra[20];
+    public:
+        bool LeerEnDiscoNormal(int pos);
+        bool LeerEnDiscoDificil(int pos);
+        int cantidadNormal();
+        int cantidadDificil();
+        void random(int dificultad);
+        void mostrarRand(SDL_Surface* pantalla);
+        bool estado(SDL_Surface* pantalla, char* verif);
+        char getLetra(int pos){return palabra[0];}
+};
+
+bool archivo::LeerEnDiscoNormal(int pos){
+        bool x;
+        FILE *p;
+        p=fopen(rutaArchivoNormal,"rb");
+        if(p==NULL)
+            return false;
+
+        fseek(p,pos*sizeof *this,0);
+
+        x=fread(this,sizeof *this,1,p);
+        fclose(p);
+        return x;
+}
+
+int archivo::cantidadNormal(){
+    FILE *p;
+    p=fopen(rutaArchivoNormal,"rb");
+    if(p==NULL)
+        return -1;
+    fseek(p,0,2);
+    long tam = ftell(p);
+    int cant = tam/sizeof *this;
+    fclose(p);
+    return cant;
+
+}
+
+bool archivo::LeerEnDiscoDificil(int pos){
+        bool x;
+        FILE *p;
+        p=fopen(rutaArchivoDificil,"rb");
+        if(p==NULL)
+            return false;
+
+        fseek(p,pos*sizeof *this,0);
+
+        x=fread(this,sizeof *this,1,p);
+        fclose(p);
+        return x;
+}
+
+int archivo::cantidadDificil(){
+    FILE *p;
+    p=fopen(rutaArchivoDificil,"rb");
+    if(p==NULL)
+        return -1;
+    fseek(p,0,2);
+    long tam = ftell(p);
+    int cant = tam/sizeof *this;
+    fclose(p);
+    return cant;
+
+}
+
+void archivo::random(int dificultad){
+    int tam, numRand;
+    if(dificultad==1){
+        tam=cantidadNormal();
+        numRand=rand()%tam;
+        LeerEnDiscoNormal(numRand);
+    }else{
+        tam=cantidadDificil();
+        numRand=rand()%tam;
+        LeerEnDiscoDificil(numRand);
+    }
+}
+
+void archivo::mostrarRand(SDL_Surface* pantalla){
+    cadena textoRandom;
+
+    textoRandom.cargar("Tipografias/Letra.ttf", 20);
+    textoRandom.escribirCadena(palabra);
+    textoRandom.colorRelleno(0,0,0);
+    textoRandom.colorFondo(0,153,153);
+    textoRandom.renderizar();
+    textoRandom.posicion(400, 50);
+    textoRandom.pintarColorFondo(0,153,153);
+    textoRandom.mostrar(pantalla);
+}
+
+bool archivo::estado(SDL_Surface* pantalla, char* verif){
+    int tamPalabara, tamVerfi, aux;
+
+    tamVerfi=strlen(verif)-9;
+    tamPalabara=strlen(palabra);
+
+    aux=tamVerfi-1;
+
+    if(tamPalabara != tamVerfi){
+        if(verif[aux+9]==' '){
+            cadena txt;
+            txt.cargar("Tipografias/Letra.ttf", 20);
+            txt.escribirCadena("CONTINUE");
+            txt.colorRelleno(0,0,0);
+            txt.colorFondo(0,153,153);
+            txt.renderizar();
+            txt.posicion(400, 100);
+            txt.pintarColorFondo(0,153,153);
+            txt.mostrar(pantalla);
+            return false;
+        }else if(palabra[aux]==verif[aux+9]){
+            cadena txt;
+            txt.cargar("Tipografias/Letra.ttf", 20);
+            txt.escribirCadena("IGUAL");
+            txt.colorRelleno(0,0,0);
+            txt.colorFondo(0,153,153);
+            txt.renderizar();
+            txt.posicion(400, 100);
+            txt.pintarColorFondo(0,153,153);
+            txt.mostrar(pantalla);
+            return false;
+        }else{
+            return true;
+        }
+    }else{
+        return true;
+    }
+}
+
 #endif // TEXTO_H_INCLUDED
+
