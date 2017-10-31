@@ -15,14 +15,20 @@ using namespace std;
 
 int main(int argc, char** argv){
     SDL_Surface* pantalla = NULL;
-    objetos suelo;
+    objetos suelo, caja;
     pj personaje;
     cadena txt;
-    palabras pal;
+    SDL_Event tecla;
     bool gameloop=true;
-    bool colPiso;
+    bool eventoEsc;
+    char* algo;
+    char palabra[30];
+    strcpy(palabra, "ESCTIRO: ");
 
-    pal.cargar();
+    const int FPS=60;
+    const int frameDelay=1000/FPS;
+    Uint32 frameStart;
+    int frameTime;
 
     SDL_Init(SDL_INIT_EVERYTHING);
     pantalla = SDL_SetVideoMode(800,600,32,SDL_HWSURFACE | SDL_DOUBLEBUF);
@@ -30,18 +36,19 @@ int main(int argc, char** argv){
     suelo.cargar("Imagenes/Piso.bmp");
     personaje.cargar("Imagenes/Personaje1.bmp");
     suelo.posicionar(0,450);
-    personaje.posicionar(100, 150);
-    personaje.velocidad(1, 1);
+    personaje.posicionar(100, 350);
+    personaje.velocidad(4);
 
     txt.cargar("Tipografias/Letra.ttf", 20);
-    txt.escribirCadena(pal.getPal());
+    txt.escribirCadena(" ");
     txt.colorRelleno(0,0,0);
     txt.colorFondo(0,0,0);
     txt.renderizar();
     txt.posicion(20, 20);
 
     while(gameloop==true){
-        gameloop=salir();
+        frameStart=SDL_GetTicks();
+
         pintarPantalla(pantalla, 110, 190, 250);
 
         txt.pintarColorFondo(0,0,0);
@@ -49,20 +56,29 @@ int main(int argc, char** argv){
         personaje.mostrar(pantalla);
         suelo.mostrar(pantalla);
 
-        colPiso=personaje.colision(suelo.getRect());
-        personaje.gravedad(colPiso);
-        personaje.mover();
+        eventoEsc=SDL_PollEvent(&tecla);
 
-        if(colPiso==true){
-            //txt.escribirCadena("colisiono Piso");
-            //txt.renderizar();
-            personaje.salto();
-        }else{
-            //txt.escribirCadena("NO colisiono");
-            //txt.renderizar();
+        if(tecla.type==SDL_QUIT){
+            gameloop=false;
+        }
+        if(tecla.type == SDL_KEYDOWN){
+            if(tecla.key.keysym.sym == SDLK_ESCAPE)
+                gameloop=false;
+
+            personaje.mover();
+            while(eventoEsc){
+                eventoEsc=escribir(tecla, palabra);
+            }
         }
 
+        txt.escribirCadena(palabra);
+        txt.renderizar();
+
         SDL_Flip(pantalla);
+
+        frameTime=SDL_GetTicks()-frameStart;
+        if(frameDelay > frameTime)
+            SDL_Delay(frameDelay - frameTime);
     }
 
     return 0;

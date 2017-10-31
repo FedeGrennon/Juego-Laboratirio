@@ -5,10 +5,10 @@ class pj{
     private:
         SDL_Surface* personaje;
         SDL_Rect pos;
-        int velX, velY;
+        int vel;
     public:
         pj(){personaje = NULL;}
-        void velocidad(int x, int y){velX=x; velY=y;}
+        void velocidad(int velocidad){vel=velocidad;}
         SDL_Rect getRect(){return pos;}
         void cargar(char* imagen){personaje=IMG_Load(imagen);}
         void posicionar(float x=0, float y=0){
@@ -19,40 +19,19 @@ class pj{
         }
         void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(personaje, NULL, pantalla, &pos);}
         void mover();
-        void salto();
         int getPosX(){return pos.x;}
         bool colision(SDL_Rect objAcolisionar);
-        void gravedad(bool col);
         ~pj(){SDL_FreeSurface(personaje);}
 };
 
 void pj::mover(){
-    SDL_Event tec;
     Uint8 *tecla;
     tecla=SDL_GetKeyState(NULL);
 
-    SDL_PollEvent(&tec);
-
-    if(tecla[SDLK_RIGHT]==1)
-        pos.x += velX;
-    if(tecla[SDLK_LEFT]==1)
-        pos.x -= velX;
-}
-
-void pj::salto(){
-    SDL_Event tec;
-    Uint8 *tecla;
-    tecla=SDL_GetKeyState(NULL);
-
-    SDL_PollEvent(&tec);
-
-    if(tecla[SDLK_UP]==1){
-        for(int i=0; i<=12; i++){
-            pos.y -= velY+i;
-            Sleep(1);
-        }
-        tecla[SDLK_UP]=0;
-    }
+    if(tecla[SDLK_RIGHT] == 1)
+        pos.x += vel;
+    if(tecla[SDLK_LEFT] == 1)
+        pos.x -= vel;
 }
 
 bool pj::colision(SDL_Rect objAcolisionar){
@@ -66,15 +45,10 @@ bool pj::colision(SDL_Rect objAcolisionar){
     x2=objAcolisionar.x;
     y2=objAcolisionar.y;
 
-    if(((x1+w1)>x2) && ((y1+h1)>y2) && ((x2+w2)>x1) && ((y2+h2)>y1))
+    if((x1+w1)>x2 && ((y1+h1)>y2) && ((x2+w2)>x1) && ((y2+h2)>y1))
         return true;
     else
         return false;
-}
-
-void pj::gravedad(bool col){
-    if(col==false)
-        pos.y += velY;
 }
 
 #endif // PERSONAJE_H_INCLUDED
