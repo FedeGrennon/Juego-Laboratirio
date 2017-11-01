@@ -19,5 +19,4 @@ class objetos{
         SDL_Rect getRect(){return pos;}
         ~objetos(){SDL_FreeSurface(objeto);}
 };
-
 #endif // ESCENARIO_H_INCLUDED

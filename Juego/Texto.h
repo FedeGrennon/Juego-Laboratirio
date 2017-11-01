@@ -1,8 +1,12 @@
 #ifndef TEXTO_H_INCLUDED
 #define TEXTO_H_INCLUDED
 
+#include "Personaje.h"
+
 const char* rutaArchivoNormal="Archivos/palabrasNor.dat";
 const char* rutaArchivoDificil="Archivos/palabrasDif.dat";
+const int posxPalabraRandom=600;
+const int posyPalabraRandom=20;
 
 class cadena{
     private:
@@ -21,7 +25,7 @@ class cadena{
         void cargar(char* tipografia, int tamFuente){fuente = TTF_OpenFont(tipografia,tamFuente);}
         void escribirCadena(char* a){strcpy(texto, a);}
         void colorRelleno(int rojo, int verde, int azul){fgcolor.r=rojo;  fgcolor.g=verde; fgcolor.b=azul;}
-        void colorFondo(int rojo, int verde, int azul){bgcolor.r=rojo;  bgcolor.g=verde; bgcolor.b=azul;}
+        void colorFondo(int rojo=0, int verde=0, int azul=0){bgcolor.r=rojo;  bgcolor.g=verde; bgcolor.b=azul;}
         void renderizar(){
             ttext = TTF_RenderText_Shaded(fuente,texto,fgcolor,bgcolor);
         }
@@ -29,7 +33,7 @@ class cadena{
             rectangulo.y=y;
             rectangulo.x=x;
         }
-        void pintarColorFondo(int rojo, int verde, int azul){SDL_SetColorKey(ttext,SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(ttext->format,rojo,verde,azul));}
+        void pintarColorFondo(int rojo=0, int verde=0, int azul=0){SDL_SetColorKey(ttext,SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(ttext->format,rojo,verde,azul));}
         void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(ttext,NULL,pantalla,&rectangulo);}
 
         ~cadena(){
@@ -124,6 +128,7 @@ bool restricciones(SDL_Event tecla){
     if(tecla.key.keysym.sym != SDLK_POWER)
     if(tecla.key.keysym.sym != SDLK_EURO)
     if(tecla.key.keysym.sym != SDLK_TAB)
+    if(tecla.key.keysym.sym != SDLK_BACKSPACE)
         return true;
 
     return false;
@@ -165,6 +170,18 @@ bool escribir(SDL_Event tecla, char* palabra){
     return false;
 }
 
+void pintarEnPantalla(char* texto, SDL_Surface* pantalla, int posx=0, int posy=0, int rr=0, int gr=0, int br=0, int rf=0, int gf=0, int bf=0){
+    cadena txt;
+
+    txt.cargar("Tipografias/Letra.ttf", 20);
+    txt.escribirCadena(texto);
+    txt.colorRelleno(rr,gr,br);
+    txt.colorFondo(rf,gf,bf);
+    txt.renderizar();
+    txt.posicion(posx, posy);
+    txt.pintarColorFondo(rf,gf,bf);
+    txt.mostrar(pantalla);
+}
 
 
 class archivo{
@@ -238,59 +255,34 @@ int archivo::cantidadDificil(){
 void archivo::random(int dificultad){
     int tam, numRand;
     if(dificultad==1){
-        tam=cantidadNormal();
-        numRand=rand()%tam;
-        LeerEnDiscoNormal(numRand);
+            tam=cantidadNormal();
+            numRand=rand()%tam;
+            LeerEnDiscoNormal(numRand);
     }else{
-        tam=cantidadDificil();
-        numRand=rand()%tam;
-        LeerEnDiscoDificil(numRand);
+            tam=cantidadDificil();
+            numRand=rand()%tam;
+            LeerEnDiscoDificil(numRand);
     }
 }
 
 void archivo::mostrarRand(SDL_Surface* pantalla){
-    cadena textoRandom;
-
-    textoRandom.cargar("Tipografias/Letra.ttf", 20);
-    textoRandom.escribirCadena(palabra);
-    textoRandom.colorRelleno(0,0,0);
-    textoRandom.colorFondo(0,153,153);
-    textoRandom.renderizar();
-    textoRandom.posicion(400, 50);
-    textoRandom.pintarColorFondo(0,153,153);
-    textoRandom.mostrar(pantalla);
+    pintarEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
 }
 
 bool archivo::estado(SDL_Surface* pantalla, char* verif){
     int tamPalabara, tamVerfi, aux;
 
-    tamVerfi=strlen(verif)-9;
+    tamVerfi=strlen(verif)-1;
     tamPalabara=strlen(palabra);
 
     aux=tamVerfi-1;
 
     if(tamPalabara != tamVerfi){
-        if(verif[aux+9]==' '){
-            cadena txt;
-            txt.cargar("Tipografias/Letra.ttf", 20);
-            txt.escribirCadena("CONTINUE");
-            txt.colorRelleno(0,0,0);
-            txt.colorFondo(0,153,153);
-            txt.renderizar();
-            txt.posicion(400, 100);
-            txt.pintarColorFondo(0,153,153);
-            txt.mostrar(pantalla);
+        if(verif[aux+1]==' '){
             return false;
-        }else if(palabra[aux]==verif[aux+9]){
-            cadena txt;
-            txt.cargar("Tipografias/Letra.ttf", 20);
-            txt.escribirCadena("IGUAL");
-            txt.colorRelleno(0,0,0);
-            txt.colorFondo(0,153,153);
-            txt.renderizar();
-            txt.posicion(400, 100);
-            txt.pintarColorFondo(0,153,153);
-            txt.mostrar(pantalla);
+        }else if(palabra[aux]==verif[aux+1]){
+            palabra[aux]=' ';
+            verif[aux+1]=' ';
             return false;
         }else{
             return true;

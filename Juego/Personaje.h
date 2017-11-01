@@ -20,6 +20,7 @@ class pj{
         void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(personaje, NULL, pantalla, &pos);}
         void mover();
         int getPosX(){return pos.x;}
+        int getPosY(){return pos.y;}
         bool colision(SDL_Rect objAcolisionar);
         ~pj(){SDL_FreeSurface(personaje);}
 };
@@ -28,13 +29,13 @@ void pj::mover(){
     Uint8 *tecla;
     tecla=SDL_GetKeyState(NULL);
 
-    if(tecla[SDLK_RIGHT] == 1)
+    if(tecla[SDLK_RIGHT] == 1 && pos.x < 750)
         pos.x += vel;
-    if(tecla[SDLK_LEFT] == 1)
+    if(tecla[SDLK_LEFT] == 1 && pos.x > 0)
         pos.x -= vel;
-    if(tecla[SDLK_UP] == 1)
+    if(tecla[SDLK_UP] == 1 && pos.y > 350)
         pos.y -= vel;
-    if(tecla[SDLK_DOWN] == 1)
+    if(tecla[SDLK_DOWN] == 1 && pos.y < 500)
         pos.y += vel;
 }
 

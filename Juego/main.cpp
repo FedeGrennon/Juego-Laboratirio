@@ -2,7 +2,6 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
-#include <stdio.h>
 #include <iostream>
 #include <windows.h>
 #include <time.h>
@@ -16,16 +15,15 @@ using namespace std;
 
 int main(int argc, char** argv){
     SDL_Surface* pantalla = NULL;
-    objetos suelo, caja;
+    objetos suelo;
     pj personaje;
-    cadena txt;
     archivo ran;
     SDL_Event tecla;
+    int dificultad=1;
     bool gameloop=true;
     bool eventoEsc;
-    char* algo;
     char palabra[30];
-    strcpy(palabra, "ESCRITO: ");
+    strcpy(palabra, " ");
 
     srand(time(NULL));
 
@@ -39,25 +37,18 @@ int main(int argc, char** argv){
 
     personaje.cargar("Imagenes/Personaje1.bmp");
     suelo.cargar("Imagenes/Escenario 1.png");
-    suelo.posicionar(0,0);
+    suelo.posicionar();
     personaje.posicionar(100, 420);
     personaje.velocidad(3);
 
-    txt.cargar("Tipografias/Letra.ttf", 20);
-    txt.escribirCadena(" ");
-    txt.colorRelleno(0,0,0);
-    txt.colorFondo(0,153,153);
-    txt.renderizar();
-    txt.posicion(400, 20);
-
-    ran.random(1);
+    ran.random(dificultad);
 
     while(gameloop==true){
         frameStart=SDL_GetTicks();
 
         pintarPantalla(pantalla, 110, 190, 250);
 
-        txt.pintarColorFondo(0,153,153);
+        suelo.mostrar(pantalla);
 
         eventoEsc=SDL_PollEvent(&tecla);
 
@@ -74,18 +65,13 @@ int main(int argc, char** argv){
             }
         }
 
-        txt.escribirCadena(palabra);
-        txt.renderizar();
-
-        suelo.mostrar(pantalla);
         personaje.mostrar(pantalla);
-        txt.mostrar(pantalla);
         ran.mostrarRand(pantalla);
-
         if(ran.estado(pantalla, palabra)){
-            strcpy(palabra, "ESCRITO: ");
-            ran.random(1);
+            strcpy(palabra, " ");
+            ran.random(dificultad);
         }
+        pintarEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
 
         SDL_Flip(pantalla);
 
