@@ -26,16 +26,16 @@ class pj{
 };
 
 void pj::mover(){
-    Uint8 *tecla;
+    Uint8* tecla;
     tecla=SDL_GetKeyState(NULL);
 
-    if(tecla[SDLK_RIGHT] == 1 && pos.x < 750)
+    if(tecla[SDLK_RIGHT]==1 && pos.x < 750)
         pos.x += vel;
-    if(tecla[SDLK_LEFT] == 1 && pos.x > 0)
+    if(tecla[SDLK_LEFT]==1 && pos.x > 0)
         pos.x -= vel;
-    if(tecla[SDLK_UP] == 1 && pos.y > 350)
+    if(tecla[SDLK_UP]==1 && pos.y > 350)
         pos.y -= vel;
-    if(tecla[SDLK_DOWN] == 1 && pos.y < 500)
+    if(tecla[SDLK_DOWN]==1 && pos.y < 500)
         pos.y += vel;
 }
 

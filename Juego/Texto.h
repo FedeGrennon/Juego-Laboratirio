@@ -46,6 +46,7 @@ bool restricciones(SDL_Event tecla){
     if(tecla.key.keysym.sym != SDLK_RIGHT)
     if(tecla.key.keysym.sym != SDLK_LEFT)
     if(tecla.key.keysym.sym != SDLK_UP)
+    if(tecla.key.keysym.sym != SDLK_DOWN)
     if(tecla.key.keysym.sym != SDLK_CLEAR)
     if(tecla.key.keysym.sym != SDLK_RETURN)
     if(tecla.key.keysym.sym != SDLK_PAUSE)
@@ -85,7 +86,6 @@ bool restricciones(SDL_Event tecla){
     if(tecla.key.keysym.sym != SDLK_KP_PLUS)
     if(tecla.key.keysym.sym != SDLK_KP_ENTER)
     if(tecla.key.keysym.sym != SDLK_KP_EQUALS)
-    if(tecla.key.keysym.sym != SDLK_DOWN)
     if(tecla.key.keysym.sym != SDLK_INSERT)
     if(tecla.key.keysym.sym != SDLK_HOME)
     if(tecla.key.keysym.sym != SDLK_END)
@@ -170,7 +170,7 @@ bool escribir(SDL_Event tecla, char* palabra){
     return false;
 }
 
-void pintarEnPantalla(char* texto, SDL_Surface* pantalla, int posx=0, int posy=0, int rr=0, int gr=0, int br=0, int rf=0, int gf=0, int bf=0){
+void escribirEnPantalla(char* texto, SDL_Surface* pantalla, int posx=0, int posy=0, int rr=0, int gr=0, int br=0, int rf=0, int gf=0, int bf=0){
     cadena txt;
 
     txt.cargar("Tipografias/Letra.ttf", 20);
@@ -194,8 +194,9 @@ class archivo{
         int cantidadDificil();
         void random(int dificultad);
         void mostrarRand(SDL_Surface* pantalla);
-        bool estado(SDL_Surface* pantalla, char* verif);
+        int estado(SDL_Surface* pantalla, char* verif);
         char getLetra(int pos){return palabra[0];}
+        void serPlabra(char* pal){strcpy(palabra, pal);}
 };
 
 bool archivo::LeerEnDiscoNormal(int pos){
@@ -266,10 +267,10 @@ void archivo::random(int dificultad){
 }
 
 void archivo::mostrarRand(SDL_Surface* pantalla){
-    pintarEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
+    escribirEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
 }
 
-bool archivo::estado(SDL_Surface* pantalla, char* verif){
+int archivo::estado(SDL_Surface* pantalla, char* verif){
     int tamPalabara, tamVerfi, aux;
 
     tamVerfi=strlen(verif)-1;
@@ -279,16 +280,16 @@ bool archivo::estado(SDL_Surface* pantalla, char* verif){
 
     if(tamPalabara != tamVerfi){
         if(verif[aux+1]==' '){
-            return false;
+            return 0;
         }else if(palabra[aux]==verif[aux+1]){
             palabra[aux]=' ';
             verif[aux+1]=' ';
-            return false;
+            return 0;
         }else{
-            return true;
+            return 1;
         }
     }else{
-        return true;
+        return 2;
     }
 }
 

@@ -19,12 +19,11 @@
 1509048924 f:\utn\2do cuatrimestre\juego\juego\escenario.h
 	"Personaje.h"
 
-1509486280 source:f:\github\juego-laboratirio\juego\main.cpp
+1509676065 source:f:\github\juego-laboratirio\juego\main.cpp
 	<SDL/SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
 	<SDL_mixer.h>
-	<stdio.h>
 	<iostream>
 	<windows.h>
 	<time.h>
@@ -33,9 +32,9 @@
 	"Escenario.h"
 	"Texto.h"
 
-1509475371 f:\github\juego-laboratirio\juego\personaje.h
+1509675809 f:\github\juego-laboratirio\juego\personaje.h
 
-1509297567 f:\github\juego-laboratirio\juego\escenario.h
+1509673759 f:\github\juego-laboratirio\juego\escenario.h
 	"Personaje.h"
 
 1325738639 f:\github\juego-laboratirio\juego\mingw32\sdl\sdl-1.2.15\include\sdl\sdl.h
@@ -479,7 +478,8 @@
 	<iostream>
 	"Palabras.h"
 
-1509486343 f:\github\juego-laboratirio\juego\texto.h
+1509675550 f:\github\juego-laboratirio\juego\texto.h
+	"Personaje.h"
 
 1509408181 f:\github\juego-laboratirio\juego\varios.h
 	"Personaje.h"
