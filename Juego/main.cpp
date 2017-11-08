@@ -128,15 +128,15 @@ int main(int argc, char** argv){
     }
 
     ///TUTORIAL
-    int vidas=3;
-    objetos suelo, flecha, caja, enemigo, vida[3];
+    int vidas=3, vidaEne=3;
+    objetos suelo, flecha, enemigo, vida[3], vidaEnemigo[4];
     pj personaje;
     archivo ran;
     int dificultad=1;
     int moviendo, j=0;
     const int iniBal=700;
     int bal=iniBal;
-    bool eventoEsc, random=true, algo=false;
+    bool eventoEsc, random=true, modo=false;
     char palabra[30];
     strcpy(palabra, " ");
 
@@ -150,6 +150,13 @@ int main(int argc, char** argv){
     for(int i=0; i<3; i++){
         vida[i].cargar("Imagenes/CorazonLleno.bmp");
     }
+    vidaEnemigo[0].cargar("Imagenes/VidaEnemigoVacia.bmp");
+    vidaEnemigo[1].cargar("Imagenes/VidaEnemigo1.bmp");
+    vidaEnemigo[2].cargar("Imagenes/VidaEnemigo2.bmp");
+    vidaEnemigo[3].cargar("Imagenes/VidaEnemigoLlena.bmp");
+
+    for(int i=0; i<4; i++)
+        vidaEnemigo[i].posicionar(iniBal, 390);
 
     vida[0].posicionar(20, 20);
     vida[1].posicionar(46, 20);
@@ -158,10 +165,8 @@ int main(int argc, char** argv){
     personaje.cargar("Imagenes/Personaje1.bmp");
     suelo.cargar("Imagenes/Piso.bmp");
     flecha.cargar("Imagenes/Flecha 2.png");
-    caja.cargar("Imagenes/Caja.png");
     enemigo.cargar("Imagenes/Enemigo.png");
     flecha.posicionar(720, 470);
-    caja.posicionar(400, 450);
     enemigo.posicionar(iniBal, 420);
     personaje.posicionar(100, 420);
     personaje.velocidad(3);
@@ -183,7 +188,7 @@ int main(int argc, char** argv){
         personaje.mostrar(pantalla);
         escribirEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
 
-        if(algo==true){
+        if(modo==true){
             objetos bala;
             bala.cargar("Imagenes/Bala.png");
             ran.mostrarRand(pantalla);
@@ -195,6 +200,16 @@ int main(int argc, char** argv){
             bala.mostrar(pantalla);
             enemigo.mostrar(pantalla);
             bala.posicionar(bal-=5, 450);
+
+            if(vidaEne==3){
+                vidaEnemigo[3].mostrar(pantalla);
+            }else if(vidaEne==2){
+                vidaEnemigo[2].pintarColorFondo(180, 120, 80);
+                vidaEnemigo[2].mostrar(pantalla);
+            }else if(vidaEne==1){
+                vidaEnemigo[1].pintarColorFondo(180, 120, 80);
+                vidaEnemigo[1].mostrar(pantalla);
+            }
 
             if(personaje.colision(bala.getRect())==true){
                 if(vidas==3){
@@ -213,7 +228,7 @@ int main(int argc, char** argv){
                     for(int i=0; i<3; i++){
                         vida[i].cargar("Imagenes/CorazonLleno.bmp");
                     }
-                    algo=false;
+                    modo=false;
                     personaje.velocidad(3);
                 }
 
@@ -222,12 +237,22 @@ int main(int argc, char** argv){
         }
 
         if(ran.estado(pantalla, palabra)==2){
+            vidaEne--;
+            strcpy(palabra, " ");
+            ran.random(dificultad);
+
+            if(vidaEne==0){
+                random=false;
+                personaje.velocidad(3);
+                modo=false;
+                bal=iniBal;
+                vidaEne=3;
+            }
+        }
+
+        if(random==false){
             flecha.mostrar(pantalla);
             escribirEnPantalla("CONTINUAR", pantalla, 685, 450);
-            random=false;
-            personaje.velocidad(3);
-            algo=false;
-            bal=iniBal;
         }
 
         if(moviendo==1 && personaje.getPosX()>350 && random==false){
@@ -237,14 +262,8 @@ int main(int argc, char** argv){
         if(suelo.getPosX() ==-801){
             strcpy(palabra, " ");
             ran.random(dificultad);
-            caja.posicionar(500, 450);
             random=true;
-            algo=false;
-        }
-
-        if(personaje.colision(caja.getRect())){
-            algo=true;
-            personaje.velocidad(0);
+            modo=false;
         }
 
 
@@ -259,10 +278,16 @@ int main(int argc, char** argv){
                 tuto=false;
             }
 
+            if(random==true){
+                if(tecla.key.keysym.sym == SDLK_RETURN){
+                    modo=true;
+                    personaje.velocidad(0);
+                }
+            }
+
             moviendo=personaje.mover(random);
 
-
-            if(algo==true){
+            if(modo==true){
                 if(tecla.type == SDL_KEYDOWN){
                     if(random){
                         while(eventoEsc){
@@ -271,7 +296,6 @@ int main(int argc, char** argv){
                     }
                 }
             }
-
         }
 
         SDL_Flip(pantalla);
