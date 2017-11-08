@@ -137,7 +137,7 @@ bool restricciones(SDL_Event tecla){
 bool escribir(SDL_Event tecla, char* palabra){
     char* letra;
     if(restricciones(tecla)==true){
-        if(tecla.key.keysym.sym==SDLK_SPACE)
+        if(tecla.key.keysym.sym == SDLK_SPACE)
             strcat(palabra, " ");
         else if(tecla.key.keysym.sym==SDLK_KP0)
             strcat(palabra, "0");
@@ -163,8 +163,10 @@ bool escribir(SDL_Event tecla, char* palabra){
             letra=SDL_GetKeyName(tecla.key.keysym.sym);
         }
     }
-
-    strcat(palabra, letra);
+    if(palabra[0]==' '){
+        strcpy(palabra, letra);
+    }else
+        strcat(palabra, letra);
 
 
     return false;
@@ -196,7 +198,7 @@ class archivo{
         void mostrarRand(SDL_Surface* pantalla);
         int estado(SDL_Surface* pantalla, char* verif);
         char getLetra(int pos){return palabra[0];}
-        void serPlabra(char* pal){strcpy(palabra, pal);}
+        void setPlabra(char* pal){strcpy(palabra, pal);}
 };
 
 bool archivo::LeerEnDiscoNormal(int pos){
@@ -273,23 +275,24 @@ void archivo::mostrarRand(SDL_Surface* pantalla){
 int archivo::estado(SDL_Surface* pantalla, char* verif){
     int tamPalabara, tamVerfi, aux;
 
-    tamVerfi=strlen(verif)-1;
-    tamPalabara=strlen(palabra);
+    tamVerfi=strlen(verif); //=1
+    tamPalabara=strlen(palabra); //=5
 
-    aux=tamVerfi-1;
-
-    if(tamPalabara != tamVerfi){
-        if(verif[aux+1]==' '){
-            return 0;
-        }else if(palabra[aux]==verif[aux+1]){
-            palabra[aux]=' ';
-            verif[aux+1]=' ';
-            return 0;
-        }else{
-            return 1;
-        }
-    }else{
+    aux=tamVerfi-1; //=0
+    ///NO HAYA ERROR CON LA PALABRA QUE AL PRINCIPIO ES UN ESPACIO
+    if(verif[0]==' ')
+        return 0;
+    ///RETORNA 2 CUANDO LA PALABRA SE COMPLETO
+    if(palabra[tamPalabara-1]=='.' || palabra[0]==' ' /*|| strcmp(palabra, " ")==1*/){
         return 2;
+    }else if(palabra[aux]==verif[aux]){
+        palabra[aux]='.';
+        verif[aux]='.';
+        ///RETORNA 0 CUANDO LA LETRA ES CORRECTA
+        return 0;
+    }else{
+        ///RETORNA 1 CUANDO SE CONFUNDE
+        return 1;
     }
 }
 

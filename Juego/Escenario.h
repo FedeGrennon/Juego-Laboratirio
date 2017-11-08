@@ -18,6 +18,12 @@ class objetos{
         void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(objeto, NULL, pantalla, &pos);}
         void pintarColorFondo(int rojo=0, int verde=0, int azul=0){SDL_SetColorKey(objeto, SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(objeto->format,rojo,verde,azul));}
         SDL_Rect getRect(){return pos;}
+        int getPosX(){return pos.x;}
+        int getPosY(){return pos.y;}
+        int getW(){return pos.w;}
+        int getH(){return pos.h;}
+        SDL_Surface* getSurface(){return objeto;}
         ~objetos(){SDL_FreeSurface(objeto);}
 };
+
 #endif // ESCENARIO_H_INCLUDED

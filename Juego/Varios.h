@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void pintarPantalla(SDL_Surface* pantalla, int rojo, int verde, int azul){
+void pintar(SDL_Surface* pantalla, int rojo, int verde, int azul){
     SDL_FillRect(pantalla, 0, SDL_MapRGB(pantalla->format, rojo, verde, azul));
 }
 
