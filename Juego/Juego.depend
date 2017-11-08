@@ -19,7 +19,7 @@
 1509048924 f:\utn\2do cuatrimestre\juego\juego\escenario.h
 	"Personaje.h"
 
-1510164558 source:f:\github\juego-laboratirio\juego\main.cpp
+1510166880 source:f:\github\juego-laboratirio\juego\main.cpp
 	<SDL/SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>

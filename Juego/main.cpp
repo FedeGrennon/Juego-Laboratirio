@@ -128,11 +128,13 @@ int main(int argc, char** argv){
     }
 
     ///TUTORIAL
-    objetos suelo, flecha, caja, enemigo, bala;
+    objetos suelo, flecha, caja, enemigo, vida[3];
     pj personaje;
     archivo ran;
     int dificultad=1;
-    int moviendo, j=0, bal=600;
+    int moviendo, j=0;
+    const int iniBal=700;
+    int bal=iniBal;
     bool eventoEsc, random=true, algo=false;
     char palabra[30];
     strcpy(palabra, " ");
@@ -144,15 +146,21 @@ int main(int argc, char** argv){
     Uint32 frameStart;
     int frameTime;
 
+    for(int i=0; i<3; i++)
+        vida[i].cargar("Imagenes/Corazon.bmp");
+
+    vida[0].posicionar(20, 20);
+    vida[1].posicionar(46, 20);
+    vida[2].posicionar(72, 20);
+
     personaje.cargar("Imagenes/Personaje1.bmp");
     suelo.cargar("Imagenes/Piso.bmp");
     flecha.cargar("Imagenes/Flecha 2.png");
     caja.cargar("Imagenes/Caja.png");
     enemigo.cargar("Imagenes/Enemigo.png");
-    bala.cargar("Imagenes/Bala.png");
     flecha.posicionar(720, 470);
     caja.posicionar(55, 450);
-    enemigo.posicionar(600, 420);
+    enemigo.posicionar(iniBal, 420);
     personaje.posicionar(100, 420);
     personaje.velocidad(3);
     flecha.pintarColorFondo(255,255,255);
@@ -165,20 +173,36 @@ int main(int argc, char** argv){
 
         suelo.posicionar(j, 400);
         suelo.mostrar(pantalla);
+        for(int i=0; i<3; i++){
+            vida[i].pintarColorFondo(180, 120, 80);
+            vida[i].mostrar(pantalla);
+        }
 
         if(algo==false){
             caja.mostrar(pantalla);
         }
 
+        personaje.mostrar(pantalla);
+        escribirEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
+
         if(algo==true){
+            objetos bala;
+            bala.cargar("Imagenes/Bala.png");
             ran.mostrarRand(pantalla);
             if(ran.estado(pantalla, palabra)==1){
                 strcpy(palabra, " ");
                 ran.random(dificultad);
             }
+            personaje.posicionar(50, 420);
             bala.mostrar(pantalla);
             enemigo.mostrar(pantalla);
             bala.posicionar(bal--, 450);
+
+            if(personaje.colision(bala.getRect())==true){
+                personaje.velocidad(3);
+                algo=false;
+                bal=iniBal;
+            }
         }
 
         if(ran.estado(pantalla, palabra)==2){
@@ -186,6 +210,8 @@ int main(int argc, char** argv){
             escribirEnPantalla("CONTINUAR", pantalla, 685, 450);
             random=false;
             personaje.velocidad(3);
+            algo=false;
+            bal=iniBal;
         }
 
         if(moviendo==1 && personaje.getPosX()>350 && random==false){
@@ -200,9 +226,6 @@ int main(int argc, char** argv){
             algo=false;
         }
 
-        personaje.mostrar(pantalla);
-        escribirEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
-
 
         eventoEsc=SDL_PollEvent(&tecla);
 
@@ -215,7 +238,7 @@ int main(int argc, char** argv){
                 tuto=false;
             }
 
-            if(personaje.colision(caja.getRect())==true){
+            if(personaje.colision(caja.getRect())==true && algo==false){
                 if(tecla.key.keysym.sym == SDLK_RETURN){
                     algo=true;
                     personaje.velocidad(0);
