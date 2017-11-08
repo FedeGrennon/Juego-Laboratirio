@@ -128,6 +128,7 @@ int main(int argc, char** argv){
     }
 
     ///TUTORIAL
+    int vidas=3;
     objetos suelo, flecha, caja, enemigo, vida[3];
     pj personaje;
     archivo ran;
@@ -146,8 +147,9 @@ int main(int argc, char** argv){
     Uint32 frameStart;
     int frameTime;
 
-    for(int i=0; i<3; i++)
-        vida[i].cargar("Imagenes/Corazon.bmp");
+    for(int i=0; i<3; i++){
+        vida[i].cargar("Imagenes/CorazonLleno.bmp");
+    }
 
     vida[0].posicionar(20, 20);
     vida[1].posicionar(46, 20);
@@ -159,7 +161,7 @@ int main(int argc, char** argv){
     caja.cargar("Imagenes/Caja.png");
     enemigo.cargar("Imagenes/Enemigo.png");
     flecha.posicionar(720, 470);
-    caja.posicionar(55, 450);
+    caja.posicionar(400, 450);
     enemigo.posicionar(iniBal, 420);
     personaje.posicionar(100, 420);
     personaje.velocidad(3);
@@ -178,10 +180,6 @@ int main(int argc, char** argv){
             vida[i].mostrar(pantalla);
         }
 
-        if(algo==false){
-            caja.mostrar(pantalla);
-        }
-
         personaje.mostrar(pantalla);
         escribirEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
 
@@ -196,11 +194,29 @@ int main(int argc, char** argv){
             personaje.posicionar(50, 420);
             bala.mostrar(pantalla);
             enemigo.mostrar(pantalla);
-            bala.posicionar(bal--, 450);
+            bala.posicionar(bal-=5, 450);
 
             if(personaje.colision(bala.getRect())==true){
-                personaje.velocidad(3);
-                algo=false;
+                if(vidas==3){
+                    vida[2].cargar("Imagenes/CorazonVacio.bmp");
+                    vidas--;
+                }else if(vidas==2){
+                    vida[1].cargar("Imagenes/CorazonVacio.bmp");
+                    vidas--;
+                }else if(vidas==1){
+                    vida[0].cargar("Imagenes/CorazonVacio.bmp");
+                    vidas--;
+                }
+
+                if(vidas==0){
+                    vidas=3;
+                    for(int i=0; i<3; i++){
+                        vida[i].cargar("Imagenes/CorazonLleno.bmp");
+                    }
+                    algo=false;
+                    personaje.velocidad(3);
+                }
+
                 bal=iniBal;
             }
         }
@@ -226,6 +242,11 @@ int main(int argc, char** argv){
             algo=false;
         }
 
+        if(personaje.colision(caja.getRect())){
+            algo=true;
+            personaje.velocidad(0);
+        }
+
 
         eventoEsc=SDL_PollEvent(&tecla);
 
@@ -236,13 +257,6 @@ int main(int argc, char** argv){
         if(tecla.type == SDL_KEYDOWN || tecla.type == SDL_KEYUP){
             if(tecla.key.keysym.sym == SDLK_ESCAPE){
                 tuto=false;
-            }
-
-            if(personaje.colision(caja.getRect())==true && algo==false){
-                if(tecla.key.keysym.sym == SDLK_RETURN){
-                    algo=true;
-                    personaje.velocidad(0);
-                }
             }
 
             moviendo=personaje.mover(random);
