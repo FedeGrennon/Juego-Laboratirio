@@ -3,7 +3,7 @@
 #include "Personaje.h"
 
 class objetos{
-     private:
+     protected:
         SDL_Surface* objeto;
         SDL_Rect pos;
     public:

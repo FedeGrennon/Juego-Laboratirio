@@ -3,7 +3,7 @@
 
 #include "Escenario.h"
 
-class pj{
+class pj/*:public objetos*/{
     private:
         SDL_Surface* personaje;
         SDL_Rect pos;
@@ -20,6 +20,7 @@ class pj{
             pos.h=personaje->h;
         }
         void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(personaje, NULL, pantalla, &pos);}
+        void pintarColorFondo(int rojo=0, int verde=0, int azul=0){SDL_SetColorKey(personaje, SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(personaje->format,rojo,verde,azul));}
         int mover(bool random);
         int getPosX(){return pos.x;}
         int getPosY(){return pos.y;}
