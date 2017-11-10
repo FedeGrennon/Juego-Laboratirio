@@ -133,7 +133,7 @@ int main(int argc, char** argv){
     pj personaje;
     archivo ran;
     int dificultad=1;
-    int moviendo, j=0;
+    int moviendo, j=0, anim=0;
     const int iniBal=700;
     int bal=iniBal;
     bool eventoEsc, random=true, modo=false;
@@ -162,13 +162,13 @@ int main(int argc, char** argv){
     vida[1].posicionar(46, 20);
     vida[2].posicionar(72, 20);
 
-    personaje.cargar("Imagenes/Personaje1.bmp");
+    personaje.cargar("Imagenes/PersonajeDer.png");
     suelo.cargar("Imagenes/Piso.bmp");
     flecha.cargar("Imagenes/Flecha 2.png");
     enemigo.cargar("Imagenes/Enemigo.png");
     flecha.posicionar(720, 470);
     enemigo.posicionar(iniBal, 420);
-    personaje.posicionar(100, 420);
+    personaje.posicionar(100, 450);
     personaje.velocidad(3);
     flecha.pintarColorFondo(255,255,255);
 
@@ -194,12 +194,13 @@ int main(int argc, char** argv){
             ran.mostrarRand(pantalla);
             if(ran.estado(pantalla, palabra)==1){
                 strcpy(palabra, " ");
-                ran.random(dificultad);
+                ran.setPlabra(ran.getReserva());
             }
+
             personaje.posicionar(50, 420);
             bala.mostrar(pantalla);
             enemigo.mostrar(pantalla);
-            bala.posicionar(bal-=5, 450);
+            bala.posicionar(bal-=2, 450);
 
             if(vidaEne==3){
                 vidaEnemigo[3].mostrar(pantalla);
@@ -225,6 +226,7 @@ int main(int argc, char** argv){
 
                 if(vidas==0){
                     vidas=3;
+                    vidaEne=3;
                     for(int i=0; i<3; i++){
                         vida[i].cargar("Imagenes/CorazonLleno.bmp");
                     }
@@ -240,7 +242,6 @@ int main(int argc, char** argv){
             vidaEne--;
             strcpy(palabra, " ");
             ran.random(dificultad);
-
             if(vidaEne==0){
                 random=false;
                 personaje.velocidad(3);
@@ -265,7 +266,6 @@ int main(int argc, char** argv){
             random=true;
             modo=false;
         }
-
 
         eventoEsc=SDL_PollEvent(&tecla);
 

@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1510345288 source:c:\users\grennon\desktop\asd\asd\main.cpp
+	<SDL/SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<iostream>
+	<windows.h>
+	<time.h>
+	<string>
+
+1510170969 c:\users\grennon\desktop\asd\asd\mingw32\sdl_ttf\include\sdl_ttf.h
+	"SDL/SDL.h"
+	"SDL/begin_code.h"
+	"SDL/close_code.h"
+

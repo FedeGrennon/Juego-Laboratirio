@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <stdio.h>
+#include <string.h>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ using namespace std;
 class Archivo{
     private:
         char Palabra[20];
+        char Reserva[20];
     public:
         int cargarpalabra(){
             int dif;
@@ -16,10 +18,12 @@ class Archivo{
                 if (dif == 1){
                     cout << "Ingresar palabra de 6 letras maximo: ";
                     cin >> Palabra;
+                    strcpy(Reserva, Palabra);
                     return dif;
                 }else{
                     cout << "Ingresar palabra de mas de 6 letras minimo: ";
                     cin >> Palabra;
+                    strcpy(Reserva, Palabra);
                     return dif;
                 }
         }
@@ -27,10 +31,14 @@ class Archivo{
         void mostrar(int dificultad){
            if (dificultad == 1){
                 cout << "Dificultad normal, palabra: ";
-                cout << Palabra;
+                cout << Palabra << endl;
+                cout << "RESERVA: ";
+                cout << Reserva << endl;;
             }else{
                 cout << "Dificultad dificil, palabra: ";
-                cout << Palabra;
+                cout << Palabra << endl;;
+                cout << "RESERVA: ";
+                cout << Reserva << endl;;
             }
         }
 

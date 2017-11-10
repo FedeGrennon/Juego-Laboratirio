@@ -129,39 +129,28 @@ bool restricciones(SDL_Event tecla){
     else if(tecla.key.keysym.sym != SDLK_EURO)return true;
     else if(tecla.key.keysym.sym != SDLK_TAB)return true;
     else if(tecla.key.keysym.sym != SDLK_BACKSPACE)return true;
+    else if(tecla.key.keysym.sym == SDLK_SPACE)return true;
+    else if(tecla.key.keysym.sym==SDLK_KP0)return true;
+    else if(tecla.key.keysym.sym==SDLK_KP1)return true;
+    else if(tecla.key.keysym.sym==SDLK_KP2)return true;
+    else if(tecla.key.keysym.sym==SDLK_KP3)return true;
+    else if(tecla.key.keysym.sym==SDLK_KP4)return true;
+    else if(tecla.key.keysym.sym==SDLK_KP5)return true;
+    else if(tecla.key.keysym.sym==SDLK_KP6)return true;
+    else if(tecla.key.keysym.sym==SDLK_KP7)return true;
+    else if(tecla.key.keysym.sym==SDLK_KP8)return true;
+    else if(tecla.key.keysym.sym==SDLK_KP9)return true;
     else return false;
 }
-
 
 bool escribir(SDL_Event tecla, char* palabra){
     char* letra;
     if(restricciones(tecla)==true){
-        if(tecla.key.keysym.sym == SDLK_SPACE)
-            letra[0]=' ';
-        else if(tecla.key.keysym.sym==SDLK_KP0)
-            letra[0]='0';
-        else if(tecla.key.keysym.sym==SDLK_KP1)
-            letra[0]='1';
-        else if(tecla.key.keysym.sym==SDLK_KP2)
-            letra[0]='2';
-        else if(tecla.key.keysym.sym==SDLK_KP3)
-            letra[0]='3';
-        else if(tecla.key.keysym.sym==SDLK_KP4)
-            letra[0]='4';
-        else if(tecla.key.keysym.sym==SDLK_KP5)
-            letra[0]='5';
-        else if(tecla.key.keysym.sym==SDLK_KP6)
-            letra[0]='6';
-        else if(tecla.key.keysym.sym==SDLK_KP7)
-            letra[0]='7';
-        else if(tecla.key.keysym.sym==SDLK_KP8)
-            letra[0]='8';
-        else if(tecla.key.keysym.sym==SDLK_KP9)
-            letra[0]='9';
-        else if(tecla.key.keysym.sym){
+        if(tecla.key.keysym.sym){
             letra=SDL_GetKeyName(tecla.key.keysym.sym);
         }
     }
+    ///getkeystate
     if(palabra[0]==' '){
         strcpy(palabra, letra);
     }else
@@ -188,6 +177,7 @@ void escribirEnPantalla(char* texto, SDL_Surface* pantalla, int posx=0, int posy
 class archivo{
     private:
         char palabra[20];
+        char reserva[20];
     public:
         bool LeerEnDiscoNormal(int pos);
         bool LeerEnDiscoDificil(int pos);
@@ -198,6 +188,7 @@ class archivo{
         int estado(SDL_Surface* pantalla, char* verif);
         char getLetra(int pos){return palabra[0];}
         void setPlabra(char* pal){strcpy(palabra, pal);}
+        char* getReserva(){return reserva;}
 };
 
 bool archivo::LeerEnDiscoNormal(int pos){
@@ -279,10 +270,11 @@ int archivo::estado(SDL_Surface* pantalla, char* verif){
 
     aux=tamVerfi-1; //=0
     ///NO HAYA ERROR CON LA PALABRA QUE AL PRINCIPIO ES UN ESPACIO
-    if(verif[0]==' ')
+    if(verif[0]==' '){
         return 0;
+    }
     ///RETORNA 2 CUANDO LA PALABRA SE COMPLETO
-    if(palabra[tamPalabara-1]=='.' || palabra[0]==' ' /*|| strcmp(palabra, " ")==1*/){
+    if(palabra[tamPalabara-1]=='.' || palabra[0]==' '){
         return 2;
     }else if(palabra[aux]==verif[aux]){
         palabra[aux]='.';
