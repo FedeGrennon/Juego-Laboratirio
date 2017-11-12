@@ -7,6 +7,7 @@ class pj{
     private:
         SDL_Surface* personaje;
         SDL_Rect pos;
+        SDL_Rect anim;
         int vel;
     public:
         pj(){personaje = NULL;}
@@ -19,14 +20,14 @@ class pj{
             pos.w=50;
             pos.h=100;
         }
+        void animacion(int x, int y=0,int w=50, int h=100){
+            anim.x = x;
+            anim.y = y;
+            anim.h = h;
+            anim.w = w;
+        }
         void mostrar(SDL_Surface* pantalla){
-            SDL_Rect o;
-            o.x = 50;
-            o.y = 0;
-            o.h = 100;
-            o.w = 50;
-
-            SDL_BlitSurface(personaje, &o, pantalla, &pos);
+            SDL_BlitSurface(personaje, &anim, pantalla, &pos);
         }
         void pintarColorFondo(int rojo=0, int verde=0, int azul=0){SDL_SetColorKey(personaje, SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(personaje->format,rojo,verde,azul));}
         int mover(bool random);

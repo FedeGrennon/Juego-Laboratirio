@@ -174,6 +174,10 @@ int main(int argc, char** argv){
 
     ran.random(dificultad);
 
+    int der=0;
+
+    personaje.animacion(200);
+
     while(tuto){
         frameStart=SDL_GetTicks();
         pintar(pantalla, 110, 190, 250);
@@ -189,6 +193,7 @@ int main(int argc, char** argv){
         escribirEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
 
         if(modo==true){
+            personaje.animacion(0);
             objetos bala;
             bala.cargar("Imagenes/Bala.png");
             ran.mostrarRand(pantalla);
@@ -297,6 +302,31 @@ int main(int argc, char** argv){
                 }
             }
         }
+        if(modo==false){
+            if(moviendo==1){
+                if(der%2==0){
+                    personaje.animacion(0);
+                }else if(der%15==0){
+                    personaje.animacion(50);
+                }
+            }else if(moviendo==2){
+                if(der%2==0){
+                    personaje.animacion(150);
+                }else if(der%15==0){
+                    personaje.animacion(100);
+                }
+            }else if(moviendo==3){
+                personaje.animacion(300);
+            }else if(moviendo==4){
+                if(der%2==0){
+                    personaje.animacion(200);
+                }else if(der%15==0){
+                    personaje.animacion(250);
+                }
+            }
+        }
+
+        der++;
 
         SDL_Flip(pantalla);
         frameTime=SDL_GetTicks()-frameStart;
