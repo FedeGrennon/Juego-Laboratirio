@@ -17,10 +17,16 @@ int main(int argc, char** argv){
     ///GENERAL
     SDL_Surface* pantalla = NULL;
     SDL_Event tecla;
+    Mix_Chunk *tiro, *recarga;
 
     SDL_Init(SDL_INIT_EVERYTHING);
     pantalla = SDL_SetVideoMode(800,600,32,SDL_HWSURFACE | SDL_DOUBLEBUF);
     SDL_WM_SetCaption("Billy Manos Rapidas", "juego");
+
+    Mix_OpenAudio(22050, AUDIO_S16, 2, 4096);
+
+    atexit(Mix_CloseAudio);
+
 
     ///NIVELES
     bool tuto=false, principal=true;
@@ -174,7 +180,11 @@ int main(int argc, char** argv){
 
     ran.random(dificultad);
 
-    int der=0;
+    tiro = Mix_LoadWAV("Sonidos/Tiro.wav");
+    recarga = Mix_LoadWAV("Sonidos/Recarga.wav");
+
+    int der=0, canal;
+    bool primerTiro=true;
 
     personaje.animacion(200);
 
@@ -193,6 +203,8 @@ int main(int argc, char** argv){
         escribirEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
 
         if(modo==true){
+            if(primerTiro)
+                canal = Mix_PlayChannel(-1, tiro, 0);
             personaje.animacion(0);
             objetos bala;
             bala.cargar("Imagenes/Bala.png");
@@ -206,6 +218,8 @@ int main(int argc, char** argv){
             bala.mostrar(pantalla);
             enemigo.mostrar(pantalla);
             bala.posicionar(bal-=2, 450);
+
+            primerTiro=false;
 
             if(vidaEne==3){
                 vidaEnemigo[3].mostrar(pantalla);
@@ -236,10 +250,11 @@ int main(int argc, char** argv){
                         vida[i].cargar("Imagenes/CorazonLleno.bmp");
                     }
                     modo=false;
+                    primerTiro=true;
                     personaje.velocidad(3);
                 }
-
                 bal=iniBal;
+                canal = Mix_PlayChannel(-1, tiro, 0);
             }
         }
 
@@ -253,6 +268,7 @@ int main(int argc, char** argv){
                 modo=false;
                 bal=iniBal;
                 vidaEne=3;
+                primerTiro=true;
             }
         }
 
@@ -333,6 +349,9 @@ int main(int argc, char** argv){
         if(frameDelay > frameTime)
             SDL_Delay(frameDelay - frameTime);
     }
+
+    Mix_FreeChunk(tiro);
+    Mix_FreeChunk(recarga);
 
     return 0;
 }

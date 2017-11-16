@@ -20,7 +20,7 @@ class pj{
             pos.w=50;
             pos.h=100;
         }
-        void animacion(int x, int y=0,int w=50, int h=100){
+        void animacion(int x=0, int y=0,int w=50, int h=100){
             anim.x = x;
             anim.y = y;
             anim.h = h;
