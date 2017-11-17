@@ -141,7 +141,7 @@ int main(int argc, char** argv){
     int dificultad=1;
     int moviendo, j=0, anim=0;
     const int iniBal=700;
-    int bal=iniBal;
+    int bal=iniBal, balPersonaje=80;
     bool eventoEsc, random=true, modo=false;
     char palabra[30];
     strcpy(palabra, " ");
@@ -200,19 +200,15 @@ int main(int argc, char** argv){
         }
 
         personaje.mostrar(pantalla);
-        escribirEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
 
         if(modo==true){
             if(primerTiro)
                 canal = Mix_PlayChannel(-1, tiro, 0);
             personaje.animacion(0);
             objetos bala;
-            bala.cargar("Imagenes/Bala.png");
-            ran.mostrarRand(pantalla);
-            if(ran.estado(pantalla, palabra)==1){
-                strcpy(palabra, " ");
-                ran.setPlabra(ran.getReserva());
-            }
+            bala.cargar("Imagenes/BalaEne.png");
+            escribirEnPantalla(ran.getPalabra(), pantalla, bal-20, 425);
+            escribirEnPantalla(palabra, pantalla, bal-20, 425);
 
             personaje.posicionar(50, 420);
             bala.mostrar(pantalla);
@@ -252,16 +248,19 @@ int main(int argc, char** argv){
                     modo=false;
                     primerTiro=true;
                     personaje.velocidad(3);
+                    strcpy(palabra, " ");
+                    ran.setPlabra(ran.getReserva());
+                }else{
+                    bal=iniBal;
+                    canal = Mix_PlayChannel(-1, tiro, 0);
+                    strcpy(palabra, " ");
+                    ran.random(dificultad);
                 }
-                bal=iniBal;
-                canal = Mix_PlayChannel(-1, tiro, 0);
             }
         }
 
         if(ran.estado(pantalla, palabra)==2){
             vidaEne--;
-            strcpy(palabra, " ");
-            ran.random(dificultad);
             if(vidaEne==0){
                 random=false;
                 personaje.velocidad(3);
@@ -269,6 +268,12 @@ int main(int argc, char** argv){
                 bal=iniBal;
                 vidaEne=3;
                 primerTiro=true;
+            }else{
+                if(primerTiro==false)
+                    canal = Mix_PlayChannel(-1, tiro, 0);
+                strcpy(palabra, " ");
+                ran.random(dificultad);
+                bal=iniBal;
             }
         }
 
@@ -312,12 +317,19 @@ int main(int argc, char** argv){
                 if(tecla.type == SDL_KEYDOWN){
                     if(random){
                         while(eventoEsc){
-                            eventoEsc=escribir(tecla, palabra);
+                            if(ran.estado(pantalla, palabra)!=1){
+                                if(restricciones(tecla))
+                                    eventoEsc=escribir(tecla, palabra);
+                                else
+                                    eventoEsc=false;
+                            }else
+                                eventoEsc=false;
                         }
                     }
                 }
             }
         }
+
         if(modo==false){
             if(moviendo==1){
                 if(der%2==0){

@@ -26,4 +26,23 @@ class objetos{
         ~objetos(){SDL_FreeSurface(objeto);}
 };
 
+bool colision(SDL_Rect obj1, SDL_Rect obj2){
+    int w1, h1, x1, y1, w2, h2, x2, y2;
+    w1=obj1.w;
+    h1=obj1.w;
+    x1=obj1.w;
+    y1=obj1.w;
+
+    w2=obj2.w;
+    h2=obj2.h;
+    x2=obj2.x;
+    y2=obj2.y;
+
+    if((x1+w1)>x2 && ((y1+h1)>y2) && ((x2+w2)>x1) && ((y2+h2)>y1))
+        return true;
+    else
+        return false;
+}
+
+
 #endif // ESCENARIO_H_INCLUDED

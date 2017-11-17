@@ -43,113 +43,112 @@ class cadena{
 };
 
 bool restricciones(SDL_Event tecla){
-    if(tecla.key.keysym.sym != SDLK_RIGHT)return true;
-    else if(tecla.key.keysym.sym != SDLK_LEFT)return true;
-    else if(tecla.key.keysym.sym != SDLK_UP)return true;
-    else if(tecla.key.keysym.sym != SDLK_DOWN)return true;
-    else if(tecla.key.keysym.sym != SDLK_CLEAR)return true;
-    else if(tecla.key.keysym.sym != SDLK_RETURN)return true;
-    else if(tecla.key.keysym.sym != SDLK_PAUSE)return true;
-    else if(tecla.key.keysym.sym != SDLK_ESCAPE)return true;
-    else if(tecla.key.keysym.sym != SDLK_EXCLAIM)return true;
-    else if(tecla.key.keysym.sym != SDLK_QUOTEDBL)return true;
-    else if(tecla.key.keysym.sym != SDLK_HASH)return true;
-    else if(tecla.key.keysym.sym != SDLK_DOLLAR)return true;
-    else if(tecla.key.keysym.sym != SDLK_AMPERSAND)return true;
-    else if(tecla.key.keysym.sym != SDLK_QUOTE)return true;
-    else if(tecla.key.keysym.sym != SDLK_LEFTPAREN)return true;
-    else if(tecla.key.keysym.sym != SDLK_RIGHTPAREN)return true;
-    else if(tecla.key.keysym.sym != SDLK_ASTERISK)return true;
-    else if(tecla.key.keysym.sym != SDLK_PLUS)return true;
-    else if(tecla.key.keysym.sym != SDLK_COMMA)return true;
-    else if(tecla.key.keysym.sym != SDLK_MINUS)return true;
-    else if(tecla.key.keysym.sym != SDLK_PERIOD)return true;
-    else if(tecla.key.keysym.sym != SDLK_SLASH)return true;
-    else if(tecla.key.keysym.sym != SDLK_COLON)return true;
-    else if(tecla.key.keysym.sym != SDLK_SEMICOLON)return true;
-    else if(tecla.key.keysym.sym != SDLK_LESS)return true;
-    else if(tecla.key.keysym.sym != SDLK_EQUALS)return true;
-    else if(tecla.key.keysym.sym != SDLK_GREATER)return true;
-    else if(tecla.key.keysym.sym != SDLK_QUESTION)return true;
-    else if(tecla.key.keysym.sym != SDLK_AT)return true;
-    else if(tecla.key.keysym.sym != SDLK_LEFTBRACKET)return true;
-    else if(tecla.key.keysym.sym != SDLK_BACKSLASH)return true;
-    else if(tecla.key.keysym.sym != SDLK_RIGHTBRACKET)return true;
-    else if(tecla.key.keysym.sym != SDLK_CARET)return true;
-    else if(tecla.key.keysym.sym != SDLK_UNDERSCORE)return true;
-    else if(tecla.key.keysym.sym != SDLK_BACKQUOTE)return true;
-    else if(tecla.key.keysym.sym != SDLK_DELETE)return true;
-    else if(tecla.key.keysym.sym != SDLK_KP_PERIOD)return true;
-    else if(tecla.key.keysym.sym != SDLK_KP_DIVIDE)return true;
-    else if(tecla.key.keysym.sym != SDLK_KP_MULTIPLY)return true;
-    else if(tecla.key.keysym.sym != SDLK_KP_MINUS)return true;
-    else if(tecla.key.keysym.sym != SDLK_KP_PLUS)return true;
-    else if(tecla.key.keysym.sym != SDLK_KP_ENTER)return true;
-    else if(tecla.key.keysym.sym != SDLK_KP_EQUALS)return true;
-    else if(tecla.key.keysym.sym != SDLK_INSERT)return true;
-    else if(tecla.key.keysym.sym != SDLK_HOME)return true;
-    else if(tecla.key.keysym.sym != SDLK_END)return true;
-    else if(tecla.key.keysym.sym != SDLK_PAGEUP)return true;
-    else if(tecla.key.keysym.sym != SDLK_PAGEDOWN)return true;
-    else if(tecla.key.keysym.sym != SDLK_F1)return true;
-    else if(tecla.key.keysym.sym != SDLK_F2)return true;
-    else if(tecla.key.keysym.sym != SDLK_F3)return true;
-    else if(tecla.key.keysym.sym != SDLK_F4)return true;
-    else if(tecla.key.keysym.sym != SDLK_F5)return true;
-    else if(tecla.key.keysym.sym != SDLK_F6)return true;
-    else if(tecla.key.keysym.sym != SDLK_F7)return true;
-    else if(tecla.key.keysym.sym != SDLK_F8)return true;
-    else if(tecla.key.keysym.sym != SDLK_F9)return true;
-    else if(tecla.key.keysym.sym != SDLK_F10)return true;
-    else if(tecla.key.keysym.sym != SDLK_F11)return true;
-    else if(tecla.key.keysym.sym != SDLK_F12)return true;
-    else if(tecla.key.keysym.sym != SDLK_F13)return true;
-    else if(tecla.key.keysym.sym != SDLK_F14)return true;
-    else if(tecla.key.keysym.sym != SDLK_F15)return true;
-    else if(tecla.key.keysym.sym != SDLK_NUMLOCK)return true;
-    else if(tecla.key.keysym.sym != SDLK_CAPSLOCK)return true;
-    else if(tecla.key.keysym.sym != SDLK_SCROLLOCK)return true;
-    else if(tecla.key.keysym.sym != SDLK_RSHIFT)return true;
-    else if(tecla.key.keysym.sym != SDLK_LSHIFT)return true;
-    else if(tecla.key.keysym.sym != SDLK_RCTRL)return true;
-    else if(tecla.key.keysym.sym != SDLK_LCTRL)return true;
-    else if(tecla.key.keysym.sym != SDLK_RALT)return true;
-    else if(tecla.key.keysym.sym != SDLK_LALT)return true;
-    else if(tecla.key.keysym.sym != SDLK_RMETA)return true;
-    else if(tecla.key.keysym.sym != SDLK_LMETA)return true;
-    else if(tecla.key.keysym.sym != SDLK_LSUPER)return true;
-    else if(tecla.key.keysym.sym != SDLK_RSUPER)return true;
-    else if(tecla.key.keysym.sym != SDLK_MODE)return true;
-    else if(tecla.key.keysym.sym != SDLK_HELP)return true;
-    else if(tecla.key.keysym.sym != SDLK_PRINT)return true;
-    else if(tecla.key.keysym.sym != SDLK_SYSREQ)return true;
-    else if(tecla.key.keysym.sym != SDLK_BREAK)return true;
-    else if(tecla.key.keysym.sym != SDLK_MENU)return true;
-    else if(tecla.key.keysym.sym != SDLK_POWER)return true;
-    else if(tecla.key.keysym.sym != SDLK_EURO)return true;
-    else if(tecla.key.keysym.sym != SDLK_TAB)return true;
-    else if(tecla.key.keysym.sym != SDLK_BACKSPACE)return true;
-    else if(tecla.key.keysym.sym == SDLK_SPACE)return true;
-    else if(tecla.key.keysym.sym==SDLK_KP0)return true;
-    else if(tecla.key.keysym.sym==SDLK_KP1)return true;
-    else if(tecla.key.keysym.sym==SDLK_KP2)return true;
-    else if(tecla.key.keysym.sym==SDLK_KP3)return true;
-    else if(tecla.key.keysym.sym==SDLK_KP4)return true;
-    else if(tecla.key.keysym.sym==SDLK_KP5)return true;
-    else if(tecla.key.keysym.sym==SDLK_KP6)return true;
-    else if(tecla.key.keysym.sym==SDLK_KP7)return true;
-    else if(tecla.key.keysym.sym==SDLK_KP8)return true;
-    else if(tecla.key.keysym.sym==SDLK_KP9)return true;
-    else return false;
+    if(tecla.key.keysym.sym != SDLK_RIGHT)
+    if(tecla.key.keysym.sym != SDLK_LEFT)
+    if(tecla.key.keysym.sym != SDLK_UP)
+    if(tecla.key.keysym.sym != SDLK_DOWN)
+    if(tecla.key.keysym.sym != SDLK_CLEAR)
+    if(tecla.key.keysym.sym != SDLK_RETURN)
+    if(tecla.key.keysym.sym != SDLK_PAUSE)
+    if(tecla.key.keysym.sym != SDLK_ESCAPE)
+    if(tecla.key.keysym.sym != SDLK_EXCLAIM)
+    if(tecla.key.keysym.sym != SDLK_QUOTEDBL)
+    if(tecla.key.keysym.sym != SDLK_HASH)
+    if(tecla.key.keysym.sym != SDLK_DOLLAR)
+    if(tecla.key.keysym.sym != SDLK_AMPERSAND)
+    if(tecla.key.keysym.sym != SDLK_QUOTE)
+    if(tecla.key.keysym.sym != SDLK_LEFTPAREN)
+    if(tecla.key.keysym.sym != SDLK_RIGHTPAREN)
+    if(tecla.key.keysym.sym != SDLK_ASTERISK)
+    if(tecla.key.keysym.sym != SDLK_PLUS)
+    if(tecla.key.keysym.sym != SDLK_COMMA)
+    if(tecla.key.keysym.sym != SDLK_MINUS)
+    if(tecla.key.keysym.sym != SDLK_PERIOD)
+    if(tecla.key.keysym.sym != SDLK_SLASH)
+    if(tecla.key.keysym.sym != SDLK_COLON)
+    if(tecla.key.keysym.sym != SDLK_SEMICOLON)
+    if(tecla.key.keysym.sym != SDLK_LESS)
+    if(tecla.key.keysym.sym != SDLK_EQUALS)
+    if(tecla.key.keysym.sym != SDLK_GREATER)
+    if(tecla.key.keysym.sym != SDLK_QUESTION)
+    if(tecla.key.keysym.sym != SDLK_AT)
+    if(tecla.key.keysym.sym != SDLK_LEFTBRACKET)
+    if(tecla.key.keysym.sym != SDLK_BACKSLASH)
+    if(tecla.key.keysym.sym != SDLK_RIGHTBRACKET)
+    if(tecla.key.keysym.sym != SDLK_CARET)
+    if(tecla.key.keysym.sym != SDLK_UNDERSCORE)
+    if(tecla.key.keysym.sym != SDLK_BACKQUOTE)
+    if(tecla.key.keysym.sym != SDLK_DELETE)
+    if(tecla.key.keysym.sym != SDLK_KP_PERIOD)
+    if(tecla.key.keysym.sym != SDLK_KP_DIVIDE)
+    if(tecla.key.keysym.sym != SDLK_KP_MULTIPLY)
+    if(tecla.key.keysym.sym != SDLK_KP_MINUS)
+    if(tecla.key.keysym.sym != SDLK_KP_PLUS)
+    if(tecla.key.keysym.sym != SDLK_KP_ENTER)
+    if(tecla.key.keysym.sym != SDLK_KP_EQUALS)
+    if(tecla.key.keysym.sym != SDLK_INSERT)
+    if(tecla.key.keysym.sym != SDLK_HOME)
+    if(tecla.key.keysym.sym != SDLK_END)
+    if(tecla.key.keysym.sym != SDLK_PAGEUP)
+    if(tecla.key.keysym.sym != SDLK_PAGEDOWN)
+    if(tecla.key.keysym.sym != SDLK_F1)
+    if(tecla.key.keysym.sym != SDLK_F2)
+    if(tecla.key.keysym.sym != SDLK_F3)
+    if(tecla.key.keysym.sym != SDLK_F4)
+    if(tecla.key.keysym.sym != SDLK_F5)
+    if(tecla.key.keysym.sym != SDLK_F6)
+    if(tecla.key.keysym.sym != SDLK_F7)
+    if(tecla.key.keysym.sym != SDLK_F8)
+    if(tecla.key.keysym.sym != SDLK_F9)
+    if(tecla.key.keysym.sym != SDLK_F10)
+    if(tecla.key.keysym.sym != SDLK_F11)
+    if(tecla.key.keysym.sym != SDLK_F12)
+    if(tecla.key.keysym.sym != SDLK_F13)
+    if(tecla.key.keysym.sym != SDLK_F14)
+    if(tecla.key.keysym.sym != SDLK_F15)
+    if(tecla.key.keysym.sym != SDLK_NUMLOCK)
+    if(tecla.key.keysym.sym != SDLK_CAPSLOCK)
+    if(tecla.key.keysym.sym != SDLK_SCROLLOCK)
+    if(tecla.key.keysym.sym != SDLK_RSHIFT)
+    if(tecla.key.keysym.sym != SDLK_LSHIFT)
+    if(tecla.key.keysym.sym != SDLK_RCTRL)
+    if(tecla.key.keysym.sym != SDLK_LCTRL)
+    if(tecla.key.keysym.sym != SDLK_RALT)
+    if(tecla.key.keysym.sym != SDLK_LALT)
+    if(tecla.key.keysym.sym != SDLK_RMETA)
+    if(tecla.key.keysym.sym != SDLK_LMETA)
+    if(tecla.key.keysym.sym != SDLK_LSUPER)
+    if(tecla.key.keysym.sym != SDLK_RSUPER)
+    if(tecla.key.keysym.sym != SDLK_MODE)
+    if(tecla.key.keysym.sym != SDLK_HELP)
+    if(tecla.key.keysym.sym != SDLK_PRINT)
+    if(tecla.key.keysym.sym != SDLK_SYSREQ)
+    if(tecla.key.keysym.sym != SDLK_BREAK)
+    if(tecla.key.keysym.sym != SDLK_MENU)
+    if(tecla.key.keysym.sym != SDLK_POWER)
+    if(tecla.key.keysym.sym != SDLK_EURO)
+    if(tecla.key.keysym.sym != SDLK_TAB)
+    if(tecla.key.keysym.sym != SDLK_BACKSPACE)
+    if(tecla.key.keysym.sym != SDLK_SPACE)
+    if(tecla.key.keysym.sym != SDLK_KP0)
+    if(tecla.key.keysym.sym != SDLK_KP1)
+    if(tecla.key.keysym.sym != SDLK_KP2)
+    if(tecla.key.keysym.sym != SDLK_KP3)
+    if(tecla.key.keysym.sym != SDLK_KP4)
+    if(tecla.key.keysym.sym != SDLK_KP5)
+    if(tecla.key.keysym.sym != SDLK_KP6)
+    if(tecla.key.keysym.sym != SDLK_KP7)
+    if(tecla.key.keysym.sym != SDLK_KP8)
+    if(tecla.key.keysym.sym != SDLK_KP9)
+        return true;
+
+    return false;
 }
 
 bool escribir(SDL_Event tecla, char* palabra){
     char* letra;
-    if(restricciones(tecla)==true){
-        if(tecla.key.keysym.sym){
-            letra=SDL_GetKeyName(tecla.key.keysym.sym);
-        }
-    }
+    if(restricciones(tecla)==true)
+        letra=SDL_GetKeyName(tecla.key.keysym.sym);
     ///getkeystate
     if(palabra[0]==' '){
         strcpy(palabra, letra);
@@ -187,6 +186,7 @@ class archivo{
         void mostrarRand(SDL_Surface* pantalla);
         int estado(SDL_Surface* pantalla, char* verif);
         char getLetra(int pos){return palabra[0];}
+        char* getPalabra(){return palabra;}
         void setPlabra(char* pal){strcpy(palabra, pal);}
         char* getReserva(){return reserva;}
 };
@@ -258,20 +258,16 @@ void archivo::random(int dificultad){
     }
 }
 
-void archivo::mostrarRand(SDL_Surface* pantalla){
-    escribirEnPantalla(palabra, pantalla, posxPalabraRandom, posyPalabraRandom);
-}
-
 int archivo::estado(SDL_Surface* pantalla, char* verif){
     int tamPalabara, tamVerfi, aux;
 
     tamVerfi=strlen(verif); //=1
     tamPalabara=strlen(palabra); //=5
 
-    aux=tamVerfi-1; //=0
+    aux=tamVerfi-1;//=0
     ///NO HAYA ERROR CON LA PALABRA QUE AL PRINCIPIO ES UN ESPACIO
     if(verif[0]==' '){
-        return 0;
+        return 4;
     }
     ///RETORNA 2 CUANDO LA PALABRA SE COMPLETO
     if(palabra[tamPalabara-1]=='.' || palabra[0]==' '){
@@ -283,6 +279,10 @@ int archivo::estado(SDL_Surface* pantalla, char* verif){
         return 0;
     }else{
         ///RETORNA 1 CUANDO SE CONFUNDE
+        if(verif[0]=='.')
+            verif[aux]='\0';
+        else
+            verif[aux]=' ';
         return 1;
     }
 }

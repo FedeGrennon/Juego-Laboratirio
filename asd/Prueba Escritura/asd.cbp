@@ -31,9 +31,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add directory="Mingw32/SDL_ttf/include" />
+			<Add directory="Mingw32/SDL/include" />
 		</Compiler>
 		<Linker>
+			<Add option="-lmingw32" />
+			<Add option="-lSDLmain" />
+			<Add option="-lSDL" />
+			<Add option="-lSDL_ttf" />
 			<Add directory="Mingw32/SDL_ttf/lib" />
+			<Add directory="Mingw32/SDL/lib" />
 		</Linker>
 		<Unit filename="main.cpp" />
 		<Extensions>
