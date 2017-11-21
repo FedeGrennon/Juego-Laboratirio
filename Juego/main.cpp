@@ -18,6 +18,10 @@ int main(int argc, char** argv){
     SDL_Surface* pantalla = NULL;
     SDL_Event tecla;
     Mix_Chunk *tiro, *recarga;
+    const int FPS=60;
+    const int frameDelay=1000/FPS;
+    Uint32 frameStart;
+    int frameTime;
 
     SDL_Init(SDL_INIT_EVERYTHING);
     pantalla = SDL_SetVideoMode(800,600,32,SDL_HWSURFACE | SDL_DOUBLEBUF);
@@ -29,7 +33,57 @@ int main(int argc, char** argv){
 
 
     ///NIVELES
-    bool tuto=false, principal=true;
+    bool tuto=false, principal=false, presentacion=true;
+
+
+    ///PRESENTACION
+    pj present;
+    int anim=0;
+
+    present.cargar("Imagenes/Presentacion.png");
+    present.posicionar(110, 25);
+    present.animacion(0, 0, 580, 550);
+
+    while(presentacion){
+        frameStart=SDL_GetTicks();
+        pintar(pantalla, 51, 51, 51);
+
+        present.pintarColorFondo(51, 51, 51);
+        present.mostrar(pantalla);
+
+        if(anim==0 && anim<5){
+            present.animacion(0);
+        }else if(anim>5 && anim<10){
+            present.animacion(580, 0, 580, 550);
+        }else if(anim>10 && anim<15){
+            present.animacion(1160, 0, 580, 550);
+        }else if(anim>15 && anim<20){
+            present.animacion(1740, 0, 580, 550);
+        }else if(anim>20 && anim<25){
+            present.animacion(2320, 0, 580, 550);
+        }else if(anim>25 && anim<30){
+            present.animacion(0, 550, 580, 550);
+        }else if(anim>30 && anim<35){
+            present.animacion(580, 550, 580, 550);
+        }else if(anim>35 && anim<50){
+            present.animacion(1160, 550, 580, 550);
+        }else if(anim>50){
+            present.animacion(1740, 550, 580, 550);
+        }
+
+        anim++;
+
+        if(anim==600){
+            presentacion=false;
+            principal=true;
+        }
+
+        SDL_Flip(pantalla);
+        frameTime=SDL_GetTicks()-frameStart;
+        if(frameDelay > frameTime)
+            SDL_Delay(frameDelay - frameTime);
+    }
+
 
     ///PRINCIPAL
     SDL_Rect BP;
@@ -139,7 +193,7 @@ int main(int argc, char** argv){
     pj personaje;
     archivo ran;
     int dificultad=1;
-    int moviendo, j=0, anim=0;
+    int moviendo=0, j=0;
     const int iniBal=700;
     int bal=iniBal, balPersonaje=80;
     bool eventoEsc, random=true, modo=false;
@@ -147,11 +201,6 @@ int main(int argc, char** argv){
     strcpy(palabra, " ");
 
     srand(time(NULL));
-
-    const int FPS=60;
-    const int frameDelay=1000/FPS;
-    Uint32 frameStart;
-    int frameTime;
 
     for(int i=0; i<3; i++){
         vida[i].cargar("Imagenes/CorazonLleno.bmp");
@@ -168,13 +217,13 @@ int main(int argc, char** argv){
     vida[1].posicionar(46, 20);
     vida[2].posicionar(72, 20);
 
-    personaje.cargar("Imagenes/PersonajeDer.png");
+    personaje.cargar("Imagenes/Personaje.png");
     suelo.cargar("Imagenes/Piso.bmp");
     flecha.cargar("Imagenes/Flecha 2.png");
     enemigo.cargar("Imagenes/Enemigo.png");
     flecha.posicionar(720, 470);
     enemigo.posicionar(iniBal, 420);
-    personaje.posicionar(100, 450);
+    personaje.posicionar(100, 350);
     personaje.velocidad(3);
     flecha.pintarColorFondo(255,255,255);
 
@@ -183,10 +232,10 @@ int main(int argc, char** argv){
     tiro = Mix_LoadWAV("Sonidos/Tiro.wav");
     recarga = Mix_LoadWAV("Sonidos/Recarga.wav");
 
-    int der=0, canal;
+    int canal, der=0;
     bool primerTiro=true;
 
-    personaje.animacion(200);
+    personaje.animacion(0);
 
     while(tuto){
         frameStart=SDL_GetTicks();
@@ -199,6 +248,7 @@ int main(int argc, char** argv){
             vida[i].mostrar(pantalla);
         }
 
+        personaje.pintarColorFondo(51, 51, 51);
         personaje.mostrar(pantalla);
 
         if(modo==true){
@@ -331,28 +381,49 @@ int main(int argc, char** argv){
         }
 
         if(modo==false){
-            if(moviendo==1){
-                if(der%2==0){
+            if(moviendo==0){
+                if(der>100)
+                    der=0;
+                if(der==0 && der<50){
                     personaje.animacion(0);
-                }else if(der%15==0){
-                    personaje.animacion(50);
+                }else if(der>50 && der<100){
+                    personaje.animacion(131);
+                }
+            }else if(moviendo==1){
+                if(der>60)
+                    der=0;
+                if(der==0 && der<10){
+                    personaje.animacion(512);
+                }else if(der>10 && der<20){
+                    personaje.animacion(646);
+                }else if(der>20 && der<30){
+                    personaje.animacion(512);
+                }else if(der>30 && der<40){
+                    personaje.animacion(777);
+                }else if(der>40 && der<50){
+                    personaje.animacion(901);
+                }else if(der>50 && der<60){
+                    personaje.animacion(777);
                 }
             }else if(moviendo==2){
-                if(der%2==0){
-                    personaje.animacion(150);
-                }else if(der%15==0){
-                    personaje.animacion(100);
-                }
-            }else if(moviendo==3){
-                personaje.animacion(300);
-            }else if(moviendo==4){
-                if(der%2==0){
-                    personaje.animacion(200);
-                }else if(der%15==0){
-                    personaje.animacion(250);
+                if(der >60)
+                    der=0;
+                if(der==0 && der<10){
+                    personaje.animacion(0, 200);
+                }else if(der>10 && der<20){
+                    personaje.animacion(130, 200);
+                }else if(der>20 && der<30){
+                    personaje.animacion(0, 200);
+                }else if(der>30 && der<40){
+                    personaje.animacion(261, 200);
+                }else if(der>40 && der<50){
+                    personaje.animacion(380, 200);
+                }else if(der>50 && der<60){
+                    personaje.animacion(261, 200);
                 }
             }
         }
+
 
         der++;
 
