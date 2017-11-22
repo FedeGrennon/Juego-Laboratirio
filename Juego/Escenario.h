@@ -5,9 +5,11 @@
 class objetos{
      protected:
         SDL_Surface* objeto;
-        SDL_Rect pos;
+        SDL_Rect pos, muestra;
     public:
-        objetos(){objeto = NULL;}
+        objetos(){
+            objeto = NULL;
+        }
         void cargar(char* imagen){objeto=IMG_Load(imagen);}
         void posicionar(int x=0, int y=0){
             pos.x=x;
@@ -15,7 +17,13 @@ class objetos{
             pos.w=objeto->w;
             pos.h=objeto->h;
         }
-        void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(objeto, NULL, pantalla, &pos);}
+        void EspacioMuestral(int w, int h, int x=0, int y=0){
+            muestra.x=x;
+            muestra.y=y;
+            muestra.w=w;
+            muestra.h=h;
+        }
+        void mostrar(SDL_Surface* pantalla){SDL_BlitSurface(objeto, &muestra, pantalla, &pos);}
         void pintarColorFondo(int rojo=0, int verde=0, int azul=0){SDL_SetColorKey(objeto, SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGB(objeto->format,rojo,verde,azul));}
         SDL_Rect getRect(){return pos;}
         int getPosX(){return pos.x;}

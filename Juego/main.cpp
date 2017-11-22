@@ -17,7 +17,6 @@ int main(int argc, char** argv){
     ///GENERAL
     SDL_Surface* pantalla = NULL;
     SDL_Event tecla;
-    Mix_Chunk *tiro, *recarga;
     const int FPS=60;
     const int frameDelay=1000/FPS;
     Uint32 frameStart;
@@ -27,7 +26,7 @@ int main(int argc, char** argv){
     pantalla = SDL_SetVideoMode(800,600,32,SDL_HWSURFACE | SDL_DOUBLEBUF);
     SDL_WM_SetCaption("Billy Manos Rapidas", "juego");
 
-    Mix_OpenAudio(22050, AUDIO_S16, 2, 4096);
+    Mix_OpenAudio(44100, AUDIO_S16, 2, 4096);
 
     atexit(Mix_CloseAudio);
 
@@ -73,9 +72,15 @@ int main(int argc, char** argv){
 
         anim++;
 
-        if(anim==600){
+        if(anim==200){
             presentacion=false;
             principal=true;
+        }
+
+        SDL_PollEvent(&tecla);
+
+        if(tecla.type==SDL_QUIT){
+            principal=false;
         }
 
         SDL_Flip(pantalla);
@@ -86,35 +91,46 @@ int main(int argc, char** argv){
 
 
     ///PRINCIPAL
+    objetos pri, vol;
+    Mix_Music *cancion;
+    int canal;
+    bool pausarMusica=false;
+
+    cancion = Mix_LoadMUS("Sonidos/TemaPrincipal.mp3");
+
+    pri.cargar("Imagenes/Principal.png");
+    pri.posicionar();
+    pri.EspacioMuestral(800, 600);
+    vol.cargar("Imagenes/Vol.png");
+    vol.posicionar(567, 110);
+    vol.EspacioMuestral(30, 30);
+
     SDL_Rect BP;
-    BP.x=400;
-    BP.y=200;
+    BP.x=365;
+    BP.y=233;
     BP.w=100;
     BP.h=50;
 
     SDL_Rect SAL;
-    SAL.x=400;
-    SAL.y=300;
+    SAL.x=375;
+    SAL.y=340;
     SAL.w=100;
     SAL.h=50;
 
-    SDL_Rect PC;
-    PC.x=400;
-    PC.y=100;
-    PC.w=100;
-    PC.h=50;
+    SDL_Rect VOL;
+    VOL.x=567;
+    VOL.y=110;
+    VOL.w=30;
+    VOL.h=30;
 
-    SDL_Rect PN;
-    PN.x=250;
-    PN.y=100;
-    PN.w=100;
-    PN.h=50;
+    canal=Mix_PlayMusic(cancion, -1);
+    Mix_VolumeMusic(20);
 
     while(principal){
-        SDL_FillRect(pantalla, &SAL, SDL_MapRGB(pantalla->format, 150, 0, 0));
-        SDL_FillRect(pantalla, &BP, SDL_MapRGB(pantalla->format, 150, 0, 0));
-        SDL_FillRect(pantalla, &PC, SDL_MapRGB(pantalla->format, 150, 0, 0));
-        SDL_FillRect(pantalla, &PN, SDL_MapRGB(pantalla->format, 150, 0, 0));
+        pri.mostrar(pantalla);
+        vol.pintarColorFondo(51, 51, 51);
+        vol.mostrar(pantalla);
+
         int x, y;
 
         SDL_PollEvent(&tecla);
@@ -132,41 +148,28 @@ int main(int argc, char** argv){
         if(tecla.type==SDL_MOUSEMOTION){
             x = tecla.button.x;
             y = tecla.button.y;
-
-            if(x>BP.x && x<BP.x+BP.w && y>BP.y && y<BP.y+BP.h){
-                SDL_FillRect(pantalla, &BP, SDL_MapRGB(pantalla->format, 100, 0, 0));
-            }
-            if(x>SAL.x && x<SAL.x+SAL.w && y>SAL.y && y<SAL.y+SAL.h){
-                SDL_FillRect(pantalla, &SAL, SDL_MapRGB(pantalla->format, 100, 0, 0));
-            }
-            if(x>PC.x && x<PC.x+PC.w && y>PC.y && y<PC.y+PC.h){
-                SDL_FillRect(pantalla, &PC, SDL_MapRGB(pantalla->format, 100, 0, 0));
-            }
-            if(x>PN.x && x<PN.x+PN.w && y>PN.y && y<PN.y+PN.h){
-                SDL_FillRect(pantalla, &PN, SDL_MapRGB(pantalla->format, 100, 0, 0));
-            }
         }
 
-        if(tecla.type==SDL_MOUSEBUTTONDOWN){
+        if(tecla.type==SDL_MOUSEBUTTONDOWN && tecla.button.button==SDL_BUTTON_LEFT){
             x = tecla.button.x;
             y = tecla.button.y;
-
-            if(x>BP.x && x<BP.x+BP.w && y>BP.y && y<BP.y+BP.h){
-                SDL_FillRect(pantalla, &BP, SDL_MapRGB(pantalla->format, 50, 0, 0));
-            }
-            if(x>SAL.x && x<SAL.x+SAL.w && y>SAL.y && y<SAL.y+SAL.h){
-                SDL_FillRect(pantalla, &SAL, SDL_MapRGB(pantalla->format, 50, 0, 0));
-            }
-            if(x>PC.x && x<PC.x+PC.w && y>PC.y && y<PC.y+PC.h){
-                SDL_FillRect(pantalla, &PC, SDL_MapRGB(pantalla->format, 50, 0, 0));
-            }
-            if(x>PN.x && x<PN.x+PN.w && y>PN.y && y<PN.y+PN.h){
-                SDL_FillRect(pantalla, &PN, SDL_MapRGB(pantalla->format, 50, 0, 0));
+            if(x>VOL.x && x<VOL.x+VOL.w && y>VOL.y && y<VOL.y+VOL.h){
+                if(pausarMusica){
+                    vol.EspacioMuestral(30, 30);
+                    Mix_ResumeMusic();
+                    pausarMusica=false;
+                    tecla.type=SDL_MOUSEBUTTONUP;
+                }else{
+                    vol.EspacioMuestral(30, 30, 30);
+                    Mix_PauseMusic();
+                    pausarMusica=true;
+                    tecla.type=SDL_MOUSEBUTTONUP;
+                }
             }
         }
 
 
-        if(tecla.type==SDL_MOUSEBUTTONUP){
+        if(tecla.type==SDL_MOUSEBUTTONUP && tecla.button.button==SDL_BUTTON_LEFT){
             x = tecla.button.x;
             y = tecla.button.y;
 
@@ -176,16 +179,12 @@ int main(int argc, char** argv){
             }if(x>SAL.x && x<SAL.x+SAL.w && y>SAL.y && y<SAL.y+SAL.h){
                 principal=false;
             }
-            if(x>PC.x && x<PC.x+PC.w && y>PC.y && y<PC.y+PC.h){
-                pantalla=SDL_SetVideoMode(800,600,32,SDL_FULLSCREEN);
-            }
-            if(x>PN.x && x<PN.x+PN.w && y>PN.y && y<PN.y+PN.h){
-                pantalla=SDL_SetVideoMode(800,600,32,SDL_HWSURFACE | SDL_DOUBLEBUF);
-            }
         }
 
         SDL_Flip(pantalla);
     }
+
+    Mix_HaltMusic();
 
     ///TUTORIAL
     int vidas=3, vidaEne=3;
@@ -197,6 +196,7 @@ int main(int argc, char** argv){
     const int iniBal=700;
     int bal=iniBal, balPersonaje=80;
     bool eventoEsc, random=true, modo=false;
+    Mix_Chunk *tiro, *recarga;
     char palabra[30];
     strcpy(palabra, " ");
 
@@ -204,14 +204,17 @@ int main(int argc, char** argv){
 
     for(int i=0; i<3; i++){
         vida[i].cargar("Imagenes/CorazonLleno.bmp");
+        vida[i].EspacioMuestral(25, 22);
     }
     vidaEnemigo[0].cargar("Imagenes/VidaEnemigoVacia.bmp");
     vidaEnemigo[1].cargar("Imagenes/VidaEnemigo1.bmp");
     vidaEnemigo[2].cargar("Imagenes/VidaEnemigo2.bmp");
     vidaEnemigo[3].cargar("Imagenes/VidaEnemigoLlena.bmp");
 
-    for(int i=0; i<4; i++)
+    for(int i=0; i<4; i++){
         vidaEnemigo[i].posicionar(iniBal, 390);
+        vidaEnemigo[i].EspacioMuestral(50, 15);
+    }
 
     vida[0].posicionar(20, 20);
     vida[1].posicionar(46, 20);
@@ -226,13 +229,16 @@ int main(int argc, char** argv){
     personaje.posicionar(100, 350);
     personaje.velocidad(3);
     flecha.pintarColorFondo(255,255,255);
+    suelo.EspacioMuestral(1600, 400);
+    flecha.EspacioMuestral(50, 50);
+    enemigo.EspacioMuestral(50, 100);
 
     ran.random(dificultad);
 
     tiro = Mix_LoadWAV("Sonidos/Tiro.wav");
     recarga = Mix_LoadWAV("Sonidos/Recarga.wav");
 
-    int canal, der=0;
+    int der=0;
     bool primerTiro=true;
 
     personaje.animacion(0);
@@ -257,6 +263,7 @@ int main(int argc, char** argv){
             personaje.animacion(0);
             objetos bala;
             bala.cargar("Imagenes/BalaEne.png");
+            bala.EspacioMuestral(15,5);
             escribirEnPantalla(ran.getPalabra(), pantalla, bal-20, 425);
             escribirEnPantalla(palabra, pantalla, bal-20, 425);
 
@@ -433,6 +440,7 @@ int main(int argc, char** argv){
             SDL_Delay(frameDelay - frameTime);
     }
 
+    Mix_FreeMusic(cancion);
     Mix_FreeChunk(tiro);
     Mix_FreeChunk(recarga);
 
