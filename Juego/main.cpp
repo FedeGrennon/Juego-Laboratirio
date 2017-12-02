@@ -191,7 +191,7 @@ int main(int argc, char** argv){
     objetos suelo, flecha, enemigo, vida[3], vidaEnemigo[4];
     pj personaje;
     archivo ran;
-    int dificultad=1;
+    int dificultad=2;
     int moviendo=0, j=0;
     const int iniBal=700;
     int bal=iniBal, balPersonaje=80;
@@ -270,7 +270,7 @@ int main(int argc, char** argv){
             personaje.posicionar(50, 420);
             bala.mostrar(pantalla);
             enemigo.mostrar(pantalla);
-            bala.posicionar(bal-=2, 450);
+            bala.posicionar(bal-=5, 450);
 
             primerTiro=false;
 
